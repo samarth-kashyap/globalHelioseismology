@@ -8,7 +8,7 @@ parser.add_argument("--dell", help='delta ell', type=int)
 parser.add_argument("--t", help='radial order', type=int)
 args = parser.parse_args()
 
-pythonpath = "/home/g.samarth/anaconda3/bin/python"
+pythonpath = "python"
 execpath = "/home/g.samarth/globalHelioseismology/cs_data.py"
 
 n = args.n

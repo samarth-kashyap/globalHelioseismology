@@ -6,10 +6,13 @@
 #PBS -l walltime=01:30:00
 #PBS -q large
 echo "Starting at "`date`
-cd /home/g.samarth/Woodard2013/
+cd $PBS_O_WORKDIR
 export PATH=$PATH:/home/apps/GnuParallel/bin
 export TERM=xterm
 cd $PBS_WORKDIR
 echo $PBS_JOBID
-parallel --jobs 32 < /home/g.samarth/Woodard2013/job_scripts/ipjobs_cs_00.sh
+module load anaconda3
+conda activate helio
+echo `which python`
+parallel --jobs 32 < $PBS_O_WORKDIR/ipjobs_cs_00.sh
 echo "Finished at "`date`

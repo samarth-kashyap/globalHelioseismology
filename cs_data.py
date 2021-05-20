@@ -12,7 +12,7 @@ import sys
 
 
 # {{{ custom functions
-sys.path.append('./')
+sys.path.append('/home/g.samarth/Woodard2013/')
 from WoodardPy.helioPy import datafuncs as cdata
 # }}} custom functions
 
@@ -28,6 +28,7 @@ parser.add_argument("--lp",
                     type=int)
 parser.add_argument("--n", help="radial order for mode 1", type=int)
 parser.add_argument("--np", help="radial order for mode 2", type=int)
+parser.add_argument("--t", help="m - mp", type=int)
 parser.add_argument("--find_baselines",
                     help="use extended window for baseline estimation",
                     action="store_true")
@@ -234,6 +235,35 @@ def plot_scatter(fig, cs, pm):
 # }}} plot_scatter(fig, cs, pm)
 
 
+def plot_cs_sigma(axs, freqpm, cspm, varpn, bslpm, l1l2n1):
+    axp, axn = axs
+    freqp, freqm = freqpm
+    varp, varn = varpn
+    bslp, bslm = bslpm
+    csp, csm = cspm
+    sig1p = np.sqrt(varp)
+    sig1n = np.sqrt(varn)
+    l1, l2, n1 = l1l2n1
+    axp.fill_between(freqp, csp - sig1p, csp + sig1p, color='green', alpha=0.8)
+    axp.plot(freqp, csp, 'r', linewidth=0.9)
+    if extd_pixels > 0:
+        axp.plot(freqp, bslp[extd_pixels:-extd_pixels], '--b', linewidth=0.9)
+    else:
+        axp.plot(freqp, bslp, '--b', linewidth=0.9)
+    axp.set_title(f"Cross spectrum: {l1}, {l2} (n={n1}, t={args.t}), m+")
+    axp.set_xlabel("Frequency in microHz")
+
+    axn.fill_between(freqm, csm - sig1n, csm + sig1n, color='green', alpha=0.8)
+    axn.plot(freqm, csm, 'r', linewidth=0.9)
+    if extd_pixels > 0:
+        axn.plot(freqm, bslm[extd_pixels:-extd_pixels], '--b', linewidth=0.9)
+    else:
+        axn.plot(freqm, bslm, '--b', linewidth=0.9)
+    axn.set_title(f"Cross spectrum: {l1}, {l2} (n={n1}, t={args.t}), m-")
+    axn.set_xlabel("Frequency in microHz")
+    return axp, axn
+
+
 # {{{ def compute_d2(cs, pm):
 def compute_d2(cs, pm):
     csp1, freqp_win = derotate(cs, l1, n1, freq_all, winhalflen, pm)
@@ -310,7 +340,8 @@ if __name__ == "__main__":
     freq = freq[indm:indp].copy()
     freq_all = freq.copy()
 
-    fig_var, (axp, axn) = plt.subplots(2, 1, sharex=True, figsize=(5, 10))
+    fig_var_r, (axp_r, axn_r) = plt.subplots(2, 1, sharex=True, figsize=(5, 10))
+    fig_var_i, (axp_i, axn_i) = plt.subplots(2, 1, sharex=True, figsize=(5, 10))
 
     for days in range(dayavgnum):
         day = 6328 + 72*days
@@ -329,6 +360,10 @@ if __name__ == "__main__":
         afft2 = afftplus2[:, indm:indp]
         afft1m = afftminus1[:, indm:indp]
         afft2m = afftminus2[:, indm:indp]
+
+        # shifting the \phi2 by t
+        afft2 = np.roll(afft2[:(l1+1), :], args.t, axis=0)
+        afft2m = np.roll(afft2m[:(l1+1), :], args.t, axis=0)
         t2 = time.time()
         delt_load += t2 - t1
 
@@ -337,8 +372,10 @@ if __name__ == "__main__":
             t1 = time.time()
             csp = afft1.conjugate()*afft2[:(l1+1), :]
             csm = afft1m.conjugate()*afft2m[:(l1+1), :]
-            axp = plot_scatter(axp, csp, 1)
-            axn = plot_scatter(axn, csm, -1)
+            axp_r = plot_scatter(axp_r, csp.real, 1)
+            axn_r = plot_scatter(axn_r, csm.real, -1)
+            axp_i = plot_scatter(axp_i, csp.imag, 1)
+            axn_i = plot_scatter(axn_i, csm.imag, -1)
             csp2r = compute_d2(csp.real, 1)
             csp2i = compute_d2(csp.imag, 1)
             csn2r = compute_d2(csm.real, -1)
@@ -348,8 +385,10 @@ if __name__ == "__main__":
             t1 = time.time()
             csp_temp = afft1.conjugate()*afft2[:(l1+1), :]
             csm_temp = afft1m.conjugate()*afft2m[:(l1+1), :]
-            axp = plot_scatter(axp, csp_temp, 1)
-            axn = plot_scatter(axn, csm_temp, -1)
+            axp_r = plot_scatter(axp_r, csp.real, 1)
+            axn_r = plot_scatter(axn_r, csm.real, -1)
+            axp_i = plot_scatter(axp_i, csp.imag, 1)
+            axn_i = plot_scatter(axn_i, csm.imag, -1)
             csp2r += compute_d2(csp_temp.real, 1)
             csp2i += compute_d2(csp_temp.imag, 1)
             csn2r += compute_d2(csm_temp.real, -1)
@@ -401,8 +440,8 @@ if __name__ == "__main__":
         # finding the corresponding noise arrays
         freqp_noise = freqp_win[0, mask_freqp]
         freqm_noise = freqm_win[0, mask_freqm]
-        csp_noise = np.sum(csp1.real, axis=0)[mask_freqm]
-        csm_noise = np.sum(csm1.real, axis=0)[mask_freqp]
+        csp_noise = np.sum(csp1, axis=0)[mask_freqm]
+        csm_noise = np.sum(csm1, axis=0)[mask_freqp]
 
         # creating or updating file storing: [l1,l2,c0,c1,c2,....]
         fname_p = f'{writedir}/bsl_p_{n1:02d}_{l1:03d}_{l2:03d}.npy'
@@ -417,19 +456,27 @@ if __name__ == "__main__":
         freqp_m0 = freqp_win[0]
 
         # calculating the coefficients for the polynomial
-        fit_coeffs_m = fit_baseline(freqm_noise, csm_noise, order)
+        fit_coeffs_m1 = fit_baseline(freqm_noise, csm_noise.real, order)
+        fit_coeffs_m2 = fit_baseline(freqm_noise, csm_noise.imag, order)
+        fit_coeffs_m = fit_coeffs_m1 + 1j*fit_coeffs_m2
         # calculating the baseline
-        bsl_m = np.polynomial.polynomial.polyval(freqm_m0, fit_coeffs_m)
+        bsl_m1 = np.polynomial.polynomial.polyval(freqm_m0, fit_coeffs_m1)
+        bsl_m2 = np.polynomial.polynomial.polyval(freqm_m0, fit_coeffs_m2)
+        bsl_m = bsl_m1 + 1j*bsl_m2
 
         # calculating the coefficients for the polynomial
-        fit_coeffs_p = fit_baseline(freqp_noise, csp_noise, order)
+        fit_coeffs_p1 = fit_baseline(freqp_noise, csp_noise.real, order)
+        fit_coeffs_p2 = fit_baseline(freqp_noise, csp_noise.imag, order)
+        fit_coeffs_p = fit_coeffs_p1 + 1j*fit_coeffs_p2
         # calculating the baseline
-        bsl_p = np.polynomial.polynomial.polyval(freqp_m0, fit_coeffs_p)
+        bsl_p1 = np.polynomial.polynomial.polyval(freqp_m0, fit_coeffs_p1)
+        bsl_p2 = np.polynomial.polynomial.polyval(freqp_m0, fit_coeffs_p2)
+        bsl_p = bsl_p1 + 1j*bsl_p2
 
         l1_l2 = np.array([l1,l2])
 
-        bslp_spec = np.zeros((1, 2+order))
-        bsln_spec = np.zeros((1, 2+order))
+        bslp_spec = np.zeros((1, 2+order), dtype=np.complex128)
+        bsln_spec = np.zeros((1, 2+order), dtype=np.complex128)
 
         bslp_spec[0,:2] = l1_l2
         bsln_spec[0,:2] = l1_l2
@@ -441,29 +488,59 @@ if __name__ == "__main__":
         np.save(fname_n, bsln_spec)
 
     if args.plot:
-        fig = plt.figure(figsize=(10, 5))
+        fig2r, axs2r = plt.subplots(2, figsize=(6, 12))
+        axs2r[0].imshow(csm1.real)
+        axs2r[1].imshow(csp1.real)
+
+        fig2i, axs2i = plt.subplots(2, figsize=(6, 12))
+        axs2i[0].imshow(csm1.imag)
+        axs2i[1].imshow(csp1.imag)
+
+        figr = plt.figure(figsize=(10, 5))
         plt.subplot(121)
-        plt.plot(freqm_m0-cenfreq, np.sum(csm1.real, axis=0),
+        plt.plot(freqm_m0-cenfreq, np.sum(csm1[args.t:-args.t, :].real, axis=0),
                  color='k', label='-m')
-        plt.plot(freqm_noise-cenfreq, csm_noise, '.g')
-        plt.plot(freqm_m0-cenfreq, bsl_m, 'r')
+        plt.plot(freqm_noise-cenfreq, csm_noise.real, '.g')
+        plt.plot(freqm_m0-cenfreq, bsl_m.real, 'r')
 
 
         plt.subplot(122)
-        plt.plot(freqp_m0-cenfreq, np.sum(csp1.real, axis=0),
+        plt.plot(freqp_m0-cenfreq, np.sum(csp1[args.t:-args.t, :].real, axis=0),
                  color='k', label='+m')
-        plt.plot(freqp_noise-cenfreq, csp_noise, '.g')
-        plt.plot(freqp_m0-cenfreq, bsl_p, 'r')
+        plt.plot(freqp_noise-cenfreq, csp_noise.real, '.g')
+        plt.plot(freqp_m0-cenfreq, bsl_p.real, 'r')
+        plt.legend()
+        plt.tight_layout()
+
+        figi = plt.figure(figsize=(10, 5))
+        plt.subplot(121)
+        plt.plot(freqm_m0-cenfreq, np.sum(csm1[args.t:-args.t, :].imag, axis=0),
+                 color='k', label='-m')
+        plt.plot(freqm_noise-cenfreq, csm_noise.imag, '.g')
+        plt.plot(freqm_m0-cenfreq, bsl_m.imag, 'r')
+
+
+        plt.subplot(122)
+        plt.plot(freqp_m0-cenfreq, np.sum(csp1[args.t:-args.t, :].imag, axis=0),
+                 color='k', label='+m')
+        plt.plot(freqp_noise-cenfreq, csp_noise.imag, '.g')
+        plt.plot(freqp_m0-cenfreq, bsl_p.imag, 'r')
         plt.legend()
         plt.tight_layout()
 
         dirname = f"{gvar.outdir}/plots/{n1:02d}"
         if os.path.isdir(dirname):
-            fig.savefig(f"{dirname}/{l1}_{l2}.png")
+            figr.savefig(f"{dirname}/{l1}_{l2}_{args.t}_real.png")
+            figi.savefig(f"{dirname}/{l1}_{l2}_{args.t}_imag.png")
+            fig2r.savefig(f"{dirname}/fullspec_{l1}_{l2}_{args.t}_real.png")
+            fig2i.savefig(f"{dirname}/fullspec_{l1}_{l2}_{args.t}_imag.png")
         else:
             os.mkdir(dirname)
-            fig.savefig(f"{dirname}/{l1}_{l2}.png")
-        plt.show(fig)
+            figr.savefig(f"{dirname}/{l1}_{l2}_{args.t}_real.png")
+            figi.savefig(f"{dirname}/{l1}_{l2}_{args.t}_imag.png")
+            fig2r.savefig(f"{dirname}/fullspec_{l1}_{l2}_{args.t}_real.png")
+            fig2i.savefig(f"{dirname}/fullspec_{l1}_{l2}_{args.t}_imag.png")
+        plt.show(figi)
 
     # computing winhalflen for fit_bsl=False (without extra pixels)
     winhalflen = find_winhalflen(freq, data, l1, l1+4, n1, False)
@@ -472,8 +549,12 @@ if __name__ == "__main__":
     csm, freqm_win = derotate(csm, l1, n1, freq_all, winhalflen, -1)
 
     unbias_corr = dayavgnum/(dayavgnum-1)
-    csp_summ = csp.sum(axis=0)
-    csm_summ = csm.sum(axis=0)
+    if args.t == 0:
+        csp_summ = csp.sum(axis=0)
+        csm_summ = csm.sum(axis=0)
+    else:
+        csp_summ = csp[args.t:-args.t, :].sum(axis=0)
+        csm_summ = csm[args.t:-args.t, :].sum(axis=0)
     variance_p = ((csp2r - (csp_summ.real)**2) +
                     1j*(csp2i - (csp_summ.imag)**2))
     variance_n = ((csn2r - (csm_summ.real)**2) +
@@ -481,34 +562,31 @@ if __name__ == "__main__":
     variance_p *= unbias_corr
     variance_n *= unbias_corr
 
-    axp.plot(freqp_win[0, :], csp_summ.real, 'r', linewidth=0.9)
-    if extd_pixels > 0:
-        axp.plot(freqp_win[0, :], bsl_p[extd_pixels:-extd_pixels],
-                '--b', linewidth=0.9)
-    else:
-        axp.plot(freqp_win[0, :], bsl_p,
-                '--b', linewidth=0.9)
-    axp.set_title(f"Cross spectrum: {l1}, {l2} (n={n1}), m+")
-    axp.set_xlabel("Frequency in microHz")
+    freqpm = (freqp_win[0, :], freqm_win[0, :])
+    l1l2n1 = (l1, l2, n1)
 
-    axn.plot(freqm_win[0, :], csm_summ.real, 'r', linewidth=0.9)
-    if extd_pixels > 0:
-        axn.plot(freqm_win[0, :], bsl_m[extd_pixels:-extd_pixels],
-                '--b', linewidth=0.9)
-    else:
-        axn.plot(freqm_win[0, :], bsl_m,
-                '--b', linewidth=0.9)
-    axn.set_title(f"Cross spectrum: {l1}, {l2} (n={n1}), m-")
-    axn.set_xlabel("Frequency in microHz")
+    axesr = (axp_r, axn_r)
+    cspm = (csp_summ.real, csm_summ.real)
+    varpn = (variance_p.real, variance_n.real)
+    bslpm = (bsl_p.real, bsl_m.real)
+    axp_r, axn_r = plot_cs_sigma(axesr, freqpm, cspm, varpn, bslpm, l1l2n1)
+
+    axesr = (axp_i, axn_i)
+    cspm = (csp_summ.imag, csm_summ.imag)
+    varpn = (variance_p.imag, variance_n.imag)
+    bslpm = (bsl_p.imag, bsl_m.imag)
+    axp_i, axn_i = plot_cs_sigma(axesr, freqpm, cspm, varpn, bslpm, l1l2n1)
 
     dirname = f"{gvar.outdir}/plots/{n1:02d}"
     if os.path.isdir(dirname):
-        fig_var.savefig(f"{dirname}/csdata_{l1}_{l2}.png")
+        fig_var_r.savefig(f"{dirname}/csdata_{l1}_{l2}_{args.t}_real.png")
+        fig_var_i.savefig(f"{dirname}/csdata_{l1}_{l2}_{args.t}_imag.png")
     else:
         os.mkdir(dirname)
-        fig_var.savefig(f"{dirname}/csdata_{l1}_{l2}.png")
+        fig_var_r.savefig(f"{dirname}/csdata_{l1}_{l2}_{args.t}_real.png")
+        fig_var_i.savefig(f"{dirname}/csdata_{l1}_{l2}_{args.t}_imag.png")
 
-    plt.show(fig_var)
+    # plt.show(fig_var)
 
     # if args.plot:
     #     plt.figure(figsize=(10, 5))
@@ -524,14 +602,13 @@ if __name__ == "__main__":
     #     plt.show()
 
     # storing the spectra
-    fp_name = f"{writedir}/csp_data_{n1:02d}_{l1:03d}_{l2:03d}.npy"
-    fm_name = f"{writedir}/csm_data_{n1:02d}_{l1:03d}_{l2:03d}.npy"
+    fp_name = f"{writedir}/csp_data_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
+    fm_name = f"{writedir}/csm_data_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
     np.save(fp_name, csp)
     np.save(fm_name, csm)
 
     # storing the variance
-    fp_name = f"{writedir}/variance_p_{n1:02d}_{l1:03d}_{l2:03d}.npy"
-    fm_name = f"{writedir}/variance_n_{n1:02d}_{l1:03d}_{l2:03d}.npy"
+    fp_name = f"{writedir}/variance_p_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
+    fm_name = f"{writedir}/variance_n_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
     np.save(fp_name, variance_p)
     np.save(fm_name, variance_n)
-
