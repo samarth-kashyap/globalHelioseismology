@@ -614,13 +614,21 @@ if __name__ == "__main__":
     #     plt.show()
 
     # storing the spectra
-    fp_name = f"{writedir}/csp_data_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
-    fm_name = f"{writedir}/csm_data_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
+    if args.t == 0:
+        fp_name = f"{writedir}/csp_data_{n1:02d}_{l1:03d}_{l2:03d}.npy"
+        fm_name = f"{writedir}/csm_data_{n1:02d}_{l1:03d}_{l2:03d}.npy"
+    else:
+        fp_name = f"{writedir}/csp_data_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
+        fm_name = f"{writedir}/csm_data_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
     np.save(fp_name, csp)
     np.save(fm_name, csm)
 
     # storing the variance
-    fp_name = f"{writedir}/variance_p_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
-    fm_name = f"{writedir}/variance_n_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
+    if args.t == 0:
+        fp_name = f"{writedir}/variance_p_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
+        fm_name = f"{writedir}/variance_n_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
+    else:
+        fp_name = f"{writedir}/variance_p_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
+        fm_name = f"{writedir}/variance_n_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
     np.save(fp_name, variance_p)
     np.save(fm_name, variance_n)
