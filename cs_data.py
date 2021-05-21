@@ -83,8 +83,11 @@ def find_maskpeaks4bsl(data, freq, lmin, lmax, n):
         for ell in range(lmin-6, lmin+10):
             for enn in range(n-1, n+2):
                 f1, fwhm1, a1 = cdata.findfreq(data, ell, enn, 0)
-                mask = (freq < f1 + nlw*fwhm1) * (freq > f1 - nlw*fwhm1)
-                mask_freq[mask] = False
+                if f1 == None:
+                    continue
+                else:
+                    mask = (freq < f1 + nlw*fwhm1) * (freq > f1 - nlw*fwhm1)
+                    mask_freq[mask] = False
         return mask_freq
 # }}} find_maskpeaks4bsl(data, freq, lmin, lmax, n)
 
@@ -296,6 +299,7 @@ if __name__ == "__main__":
 
     l1, n1 = args.l, args.n
     l2, n2 = args.lp, args.np
+    print(f"l1-l2 = {l1}-{l2}, n1-n2 = {n1}-{n2}")
 
     # swapping n, l values if l2>l1
     if l2 < l1:
@@ -321,6 +325,7 @@ if __name__ == "__main__":
     # where cross spectrum is significant
     # choosing the window to be wide enough to accommodate
     # the entire cross-spectrum irrespective of ell
+    print(f"n1 = {n1}")
     winhalflen = find_winhalflen(freq, data, l1, l1+4, n1, False)
     print(f"winhalflen = {winhalflen}")
     cenfreq, cenfwhm, __ = cdata.findfreq(data, l1, n1, 0)
@@ -332,6 +337,7 @@ if __name__ == "__main__":
     indp = cdata.locatefreq(freq, cenfreq + pmfreq_p)
 
     # if fit_bsl:
+    print(f"n1 = {n1}")
     whlwindow = find_winhalflen(freq, data, l1, l1+4, n1, True)
     indm -= extd_pixels + whlwindow
     indp += extd_pixels + whlwindow
@@ -420,10 +426,12 @@ if __name__ == "__main__":
         # if delta_ell == 0:
             # winhalflen = find_winhalflen(freq, data, l1, l1+4, n1, fit_bsl)
         # else:
+        print(f"n1 = {n1}")
         winhalflen = find_winhalflen(freq, data, l1, l1+4, n1, fit_bsl)
         print(f"winhalflen = {winhalflen}")
 
         # derotating the cross spectra using the grid without interpolation
+        print(f"n1 = {n1}")
         csp1, freqp_win = derotate(csp, l1, n1, freq_all, winhalflen, 1)
         csm1, freqm_win = derotate(csm, l1, n1, freq_all, winhalflen, -1)
 
