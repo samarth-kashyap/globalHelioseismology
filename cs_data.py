@@ -459,6 +459,7 @@ if __name__ == "__main__":
         fit_coeffs_m1 = fit_baseline(freqm_noise, csm_noise.real, order)
         fit_coeffs_m2 = fit_baseline(freqm_noise, csm_noise.imag, order)
         fit_coeffs_m = fit_coeffs_m1 + 1j*fit_coeffs_m2
+        print(f"bsl_coeffs_m = {fit_coeffs_m}")
         # calculating the baseline
         bsl_m1 = np.polynomial.polynomial.polyval(freqm_m0, fit_coeffs_m1)
         bsl_m2 = np.polynomial.polynomial.polyval(freqm_m0, fit_coeffs_m2)
@@ -468,6 +469,7 @@ if __name__ == "__main__":
         fit_coeffs_p1 = fit_baseline(freqp_noise, csp_noise.real, order)
         fit_coeffs_p2 = fit_baseline(freqp_noise, csp_noise.imag, order)
         fit_coeffs_p = fit_coeffs_p1 + 1j*fit_coeffs_p2
+        print(f"bsl_coeffs_p = {fit_coeffs_p}")
         # calculating the baseline
         bsl_p1 = np.polynomial.polynomial.polyval(freqp_m0, fit_coeffs_p1)
         bsl_p2 = np.polynomial.polynomial.polyval(freqp_m0, fit_coeffs_p2)
@@ -483,6 +485,8 @@ if __name__ == "__main__":
 
         bslp_spec[0,2:] = fit_coeffs_p 
         bsln_spec[0,2:] = fit_coeffs_m
+        print(f"bsl_p = {bslp_spec}")
+        print(f"bsl_n = {bsln_spec}")
             
         np.save(fname_p, bslp_spec)
         np.save(fname_n, bsln_spec)
