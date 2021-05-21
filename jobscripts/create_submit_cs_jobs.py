@@ -49,3 +49,5 @@ with open(filename, "w") as f:
         exec_cmd = (f"{pythonpath} {execpath} --l {l1} --lp {l2} --n {n} " +
                     f"--np {n} --t {args.t} --find_baselines\n")  #--plot
         f.write(exec_cmd)
+
+os.system(f"python submit_jobs.py --n {args.n}")

@@ -1,3 +1,4 @@
 *.log
 jobscripts/ipjobs*
+jobscripts/gnup*
 __pycache__

@@ -4,7 +4,7 @@
 #PBS -e cserr.n00.log
 #PBS -l select=1:ncpus=32:mem=64gb
 #PBS -l walltime=01:30:00
-#PBS -q large
+#PBS -q small
 echo "Starting at "`date`
 cd $PBS_O_WORKDIR
 export PATH=$PATH:/home/apps/GnuParallel/bin
