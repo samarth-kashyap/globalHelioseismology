@@ -4,7 +4,6 @@ import os, sys
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--n", help='radial order', type=int)
-parser.add_argument("--dell", help='delta ell', type=int)
 parser.add_argument("--t", help='radial order', type=int)
 args = parser.parse_args()
 
@@ -12,8 +11,8 @@ pythonpath = "python"
 execpath = "/home/g.samarth/globalHelioseismology/cs_data.py"
 
 n = args.n
-dell = args.dell
 t = args.t
+dell = 2
 
 data = np.loadtxt("/home/g.samarth/globalHelioseismology/mode-params/hmi.6328.36")
 ln_arr = data[:, :2]
@@ -25,17 +24,18 @@ l1arr = []
 l2arr = []
 
 for ell1 in larr:
-    ell2 = ell1 + dell
-    mode_found = True
-    try:
-        ln_list.index([ell2, args.n])
-    except ValueError:
-        print(f" Mode not found ell = {ell2}; n = {args.n}")
-        mode_found = False
+    for fac in np.array([1., 2.]):
+        ell2 = ell1 + fac*dell
+        mode_found = True
+        try:
+            ln_list.index([ell2, args.n])
+        except ValueError:
+            print(f" Mode not found ell = {ell2}; n = {args.n}")
+            mode_found = False
 
-    if mode_found:
-        l1arr.append(ell1)
-        l2arr.append(ell2)
+        if mode_found:
+            l1arr.append(ell1)
+            l2arr.append(ell2)
 
 l1_arr = np.array(l1arr)
 l2_arr = np.array(l2arr)

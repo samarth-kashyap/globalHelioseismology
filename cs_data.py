@@ -278,7 +278,6 @@ if __name__ == "__main__":
     # directories
     writedir = gvar.writedir
 
-    
     # loading and computation times
     delt_load = 0.0
     delt_compute = 0.0
@@ -349,18 +348,20 @@ if __name__ == "__main__":
     fig_var_r, (axp_r, axn_r) = plt.subplots(2, 1, sharex=True, figsize=(5, 10))
     fig_var_i, (axp_i, axn_i) = plt.subplots(2, 1, sharex=True, figsize=(5, 10))
 
+    csp, csm = 0.0, 0.0
+    csp2r, csp2i = 0.0, 0.0
+    csn2r, csn2i = 0.0, 0.0
+
     for days in range(dayavgnum):
         day = 6328 + 72*days
         t1 = time.time()
 
-        afftplus1, afftminus1 = cdata.separatefreq(
-            cdata.loadHMIdata_avg(l1, day=day))
+        afftplus1, afftminus1 = cdata.separatefreq(cdata.loadHMIdata_avg(l1, day=day))
 
         if delta_ell == 0:
             afftplus2, afftminus2 = afftplus1, afftminus1
         else:
-            afftplus2, afftminus2 = cdata.separatefreq(
-                    cdata.loadHMIdata_avg(l2, day=day))
+            afftplus2, afftminus2 = cdata.separatefreq(cdata.loadHMIdata_avg(l2, day=day))
 
         afft1 = afftplus1[:, indm:indp]
         afft2 = afftplus2[:, indm:indp]
@@ -368,40 +369,52 @@ if __name__ == "__main__":
         afft2m = afftminus2[:, indm:indp]
 
         # shifting the \phi2 by t
-        afft2 = np.roll(afft2[:(l1+1), :], args.t, axis=0)
-        afft2m = np.roll(afft2m[:(l1+1), :], args.t, axis=0)
+        if args.t != 0:
+            afft2 = np.roll(afft2[:(l1+1), :], args.t, axis=0)
+            afft2m = np.roll(afft2m[:(l1+1), :], args.t, axis=0)
         t2 = time.time()
         delt_load += t2 - t1
 
+        # csp2r = np.zeros((l1+1, afft2.shape[1]), dtype=np.float64)
+        # csp2i = np.zeros((l1+1, afft2.shape[1]), dtype=np.float64)
+        # csn2r = np.zeros((l1+1, afft2.shape[1]), dtype=np.float64)
+        # csn2i = np.zeros((l1+1, afft2.shape[1]), dtype=np.float64)
+
         # Calculating the cross-spectrum
-        if days == 0:
-            t1 = time.time()
-            csp = afft1.conjugate()*afft2[:(l1+1), :]
-            csm = afft1m.conjugate()*afft2m[:(l1+1), :]
-            axp_r = plot_scatter(axp_r, csp.real, 1)
-            axn_r = plot_scatter(axn_r, csm.real, -1)
-            axp_i = plot_scatter(axp_i, csp.imag, 1)
-            axn_i = plot_scatter(axn_i, csm.imag, -1)
-            csp2r = compute_d2(csp.real, 1)
-            csp2i = compute_d2(csp.imag, 1)
-            csn2r = compute_d2(csm.real, -1)
-            csn2i = compute_d2(csm.imag, -1)
-            t2 = time.time()
-        else:
-            t1 = time.time()
-            csp_temp = afft1.conjugate()*afft2[:(l1+1), :]
-            csm_temp = afft1m.conjugate()*afft2m[:(l1+1), :]
-            axp_r = plot_scatter(axp_r, csp.real, 1)
-            axn_r = plot_scatter(axn_r, csm.real, -1)
-            axp_i = plot_scatter(axp_i, csp.imag, 1)
-            axn_i = plot_scatter(axn_i, csm.imag, -1)
-            csp2r += compute_d2(csp_temp.real, 1)
-            csp2i += compute_d2(csp_temp.imag, 1)
-            csn2r += compute_d2(csm_temp.real, -1)
-            csn2i += compute_d2(csm_temp.imag, -1)
-            csp += csp_temp
-            csm += csm_temp
-            t2 = time.time()
+        # if days == 0:
+        #     t1 = time.time()
+        #     csp = afft1.conjugate()*afft2[:(l1+1), :]
+        #     csm = afft1m.conjugate()*afft2m[:(l1+1), :]
+        #     axp_r = plot_scatter(axp_r, csp.real, 1)
+        #     axn_r = plot_scatter(axn_r, csm.real, -1)
+        #     axp_i = plot_scatter(axp_i, csp.imag, 1)
+        #     axn_i = plot_scatter(axn_i, csm.imag, -1)
+        #     csp2r = compute_d2(csp.real, 1)
+        #     csp2i = compute_d2(csp.imag, 1)
+        #     csn2r = compute_d2(csm.real, -1)
+        #     csn2i = compute_d2(csm.imag, -1)
+        #     t2 = time.time()
+        # else:
+        t1 = time.time()
+
+        # computing the cross-spectrum
+        csp_temp = afft1.conjugate()*afft2[:(l1+1), :]
+        csm_temp = afft1m.conjugate()*afft2m[:(l1+1), :]
+
+        # adding the cross-spectrum (for expectation value computation)
+        csp += csp_temp
+        csm += csm_temp
+        print(f"csp real max = {csp.real.max()}; csp_temp max = {csp_temp.real.max()}")
+        axp_r = plot_scatter(axp_r, csp_temp.real, 1)
+        axn_r = plot_scatter(axn_r, csm_temp.real, -1)
+        axp_i = plot_scatter(axp_i, csp_temp.imag, 1)
+        axn_i = plot_scatter(axn_i, csm_temp.imag, -1)
+
+        csp2r += compute_d2(csp_temp.real, 1)
+        csp2i += compute_d2(csp_temp.imag, 1)
+        csn2r += compute_d2(csm_temp.real, -1)
+        csn2i += compute_d2(csm_temp.imag, -1)
+        t2 = time.time()
         delt_compute += t2 - t1
     print(csp.real.max())
     
@@ -625,8 +638,8 @@ if __name__ == "__main__":
 
     # storing the variance
     if args.t == 0:
-        fp_name = f"{writedir}/variance_p_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
-        fm_name = f"{writedir}/variance_n_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
+        fp_name = f"{writedir}/variance_p_{n1:02d}_{l1:03d}_{l2:03d}.npy"
+        fm_name = f"{writedir}/variance_n_{n1:02d}_{l1:03d}_{l2:03d}.npy"
     else:
         fp_name = f"{writedir}/variance_p_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
         fm_name = f"{writedir}/variance_n_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"

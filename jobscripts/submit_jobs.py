@@ -12,9 +12,9 @@ with open(fname, "w") as f:
 #PBS -N cs.n{args.n:02}.data
 #PBS -o csout.n{args.n:02}.log
 #PBS -e cserr.n{args.n:02}.log
-#PBS -l select=1:ncpus=32:mem=64gb
+#PBS -l select=1:ncpus=16:mem=32gb
 #PBS -l walltime=01:30:00
-#PBS -q small
+#PBS -q large
 echo \"Starting at \"`date`
 cd $PBS_O_WORKDIR
 export PATH=$PATH:/home/apps/GnuParallel/bin
