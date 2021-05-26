@@ -375,28 +375,7 @@ if __name__ == "__main__":
         t2 = time.time()
         delt_load += t2 - t1
 
-        # csp2r = np.zeros((l1+1, afft2.shape[1]), dtype=np.float64)
-        # csp2i = np.zeros((l1+1, afft2.shape[1]), dtype=np.float64)
-        # csn2r = np.zeros((l1+1, afft2.shape[1]), dtype=np.float64)
-        # csn2i = np.zeros((l1+1, afft2.shape[1]), dtype=np.float64)
-
-        # Calculating the cross-spectrum
-        # if days == 0:
-        #     t1 = time.time()
-        #     csp = afft1.conjugate()*afft2[:(l1+1), :]
-        #     csm = afft1m.conjugate()*afft2m[:(l1+1), :]
-        #     axp_r = plot_scatter(axp_r, csp.real, 1)
-        #     axn_r = plot_scatter(axn_r, csm.real, -1)
-        #     axp_i = plot_scatter(axp_i, csp.imag, 1)
-        #     axn_i = plot_scatter(axn_i, csm.imag, -1)
-        #     csp2r = compute_d2(csp.real, 1)
-        #     csp2i = compute_d2(csp.imag, 1)
-        #     csn2r = compute_d2(csm.real, -1)
-        #     csn2i = compute_d2(csm.imag, -1)
-        #     t2 = time.time()
-        # else:
         t1 = time.time()
-
         # computing the cross-spectrum
         csp_temp = afft1.conjugate()*afft2[:(l1+1), :]
         csm_temp = afft1m.conjugate()*afft2m[:(l1+1), :]
@@ -449,14 +428,8 @@ if __name__ == "__main__":
         csm1, freqm_win = derotate(csm, l1, n1, freq_all, winhalflen, -1)
 
         # computing mask to extract the noise 
-        # mask_freqp = find_freq_mask4bsl(data, freqp_win[0], l1, l1+4, n1)
-        # mask_freqm = find_freq_mask4bsl(data, freqm_win[0], l1, l1+4, n1)
         mask_freqp = find_maskpeaks4bsl(data, freqp_win[0], l1, l1+4, n1)
         mask_freqm = find_maskpeaks4bsl(data, freqm_win[0], l1, l1+4, n1)
-        # mask_freqp = np.ones(len(freqp_win[0, :]), dtype=bool)
-        # mask_freqm = np.ones(len(freqm_win[0, :]), dtype=bool)
-        # mask_freqp[noisewin:-noisewin] = False
-        # mask_freqm[noisewin:-noisewin] = False
 
         # finding the corresponding noise arrays
         freqp_noise = freqp_win[0, mask_freqp]
@@ -565,7 +538,7 @@ if __name__ == "__main__":
             figi.savefig(f"{dirname}/{l1}_{l2}_{args.t}_imag.png")
             fig2r.savefig(f"{dirname}/fullspec_{l1}_{l2}_{args.t}_real.png")
             fig2i.savefig(f"{dirname}/fullspec_{l1}_{l2}_{args.t}_imag.png")
-        plt.show(figi)
+        # plt.show(figi)
 
     # computing winhalflen for fit_bsl=False (without extra pixels)
     winhalflen = find_winhalflen(freq, data, l1, l1+4, n1, False)
