@@ -5,6 +5,7 @@ import global_vars as GV
 from math import sqrt
 import numpy as np
 import argparse
+from scipy.signal import savgol_filter as savgol
 import time
 import os
 import sys
@@ -17,6 +18,8 @@ from WoodardPy.helioPy import datafuncs as cdata
 # }}} custom functions
 
 gvar = GV.globalVars()
+SM_WINLEN = 25
+SM_POLYORD = 5
 
 # {{{ ArgumentParser
 parser = argparse.ArgumentParser()
@@ -35,6 +38,9 @@ parser.add_argument("--find_baselines",
 parser.add_argument("--plot",
                     help="plot results after computation",
                     action="store_true")
+parser.add_argument("--smooth",
+                    help='compute smoothened spectra',
+                    action='store_true')
 args = parser.parse_args()
 # }}} parser
 
@@ -49,18 +55,24 @@ noisewin = 50  #extd_pixels
 order = 2
 
 # {{{ def find_freq_mask4bsl(data, lmin, lmax, n):
-def find_freq_mask4bsl(data, freq, lmin, lmax, n): 
+def find_freq_mask4bsl(data, freq, lmin, lmax, n1, n2): 
     # creating the lmax and lmins for the edge of window
     # for baseline estimation
     lmax = lmax + 6 
     lmin = lmin - 6  
 
-    mask_lmax = (data[:, 0] == lmax) * (data[:, 1] == n)
-    mask_lmin = (data[:, 0] == lmin) * (data[:, 1] == n)
+    mask_lmax1 = (data[:, 0] == lmax) * (data[:, 1] == n)
+    mask_lmin1 = (data[:, 0] == lmin) * (data[:, 1] == n)
+    mask_lmax2 = (data[:, 0] == lmax) * (data[:, 1] == n)
+    mask_lmin2 = (data[:, 0] == lmin) * (data[:, 1] == n)
 
     # edges of main signal
-    freq_max = data[mask_lmax, 2] + 10 * data[mask_lmax, 4]
-    freq_min = data[mask_lmin, 2] - 10 * data[mask_lmin, 4]
+    freq_max1 = data[mask_lmax1, 2] + 10 * data[mask_lmax1, 4]
+    freq_min1 = data[mask_lmin1, 2] - 10 * data[mask_lmin1, 4]
+    freq_max2 = data[mask_lmax2, 2] + 10 * data[mask_lmax2, 4]
+    freq_min2 = data[mask_lmin2, 2] - 10 * data[mask_lmin2, 4]
+    freq_max = max(freq_max1, freq_max2)
+    freq_min = min(freq_min1, freq_min2)
 
     # computing mask for frequency axis for bsl_estimation
     mask_freq = (freq < freq_min) + (freq > freq_max)
@@ -93,29 +105,40 @@ def find_maskpeaks4bsl(data, freq, lmin, lmax, n):
 
 
 # {{{ def find_winhalflen(freq, freq_min, freq_max):
-def find_winhalflen(freq, data, lmin, lmax, n, fit_bsl=False):
+def find_winhalflen(freq, data, lmin, lmax, n1, n2, fit_bsl=False):
     # computing freq_min, freq_max of window
-    try: # checking if L for \delta_ell = 4 is available
-        lmax1 = lmax + 6
-        assert ((data[:, 0] == lmax1) * (data[:, 1] == n)).any(), f"not found"
-    except AssertionError:
-        lmax1 = lmax + 4
+    n_arr = np.array([n1, n2])
+    freq_max_global = -1e15
+    freq_min_global = 1e15
+    for ienn, enn in enumerate(n_arr):
+        n = int(enn)
+        try: # checking if L for \delta_ell = 4 is available
+            lmax1 = lmax + 6
+            assert ((data[:, 0] == lmax1) * (data[:, 1] == n)).any(), f"not found"
+        except AssertionError:
+            lmax1 = lmax + 4
 
-    lmax = lmax1
+        lmax = lmax1
 
-    assert lmin > 6, "l should be greater than 6"
-    lmin = lmin - 6
+        assert lmin > 6, "l should be greater than 6"
+        lmin = lmin - 6
 
-    mask_lmax = (data[:, 0] == lmax) * (data[:, 1] == n)
-    mask_lmin = (data[:, 0] == lmin) * (data[:, 1] == n)
-    assert mask_lmin.any(), f"Mode not found: lmin = {lmin}, n = {n}"
+        mask_lmax = (data[:, 0] == lmax) * (data[:, 1] == n)
+        mask_lmin = (data[:, 0] == lmin) * (data[:, 1] == n)
+        assert mask_lmin.any(), f"Mode not found: lmin = {lmin}, n = {n}"
 
-    freq_max = data[mask_lmax, 2] + 5*data[mask_lmax, 4]
-    freq_min = data[mask_lmin, 2] - 5*data[mask_lmin, 4]
+        freq_max = data[mask_lmax, 2] + 5*data[mask_lmax, 4]
+        freq_min = data[mask_lmin, 2] - 5*data[mask_lmin, 4]
+
+        if freq_max > freq_max_global:
+            freq_max_global = freq_max
+
+        if freq_min < freq_min_global:
+            freq_min_global = freq_min
 
     # computing indices of freq_min and freq_max
-    idx_min = np.argmin(np.abs(freq - freq_min))
-    idx_max = np.argmin(np.abs(freq - freq_max))
+    idx_min = np.argmin(np.abs(freq - freq_min_global))
+    idx_max = np.argmin(np.abs(freq - freq_max_global))
 
     if fit_bsl:
         idx_min -= extd_pixels
@@ -274,6 +297,15 @@ def compute_d2(cs, pm):
     return csp**2
 # }}} compute_d2(cs, pm)
 
+
+def smooth_spectra(cs):
+    mlen = cs.shape[0]
+    cs_smooth = np.zeros_like(cs)
+    for i in range(mlen):
+        cs_smooth[i, :] = savgol(cs[i, :].real, SM_WINLEN, SM_POLYORD)
+        cs_smooth[i, :] += 1j*savgol(cs[i, :].imag, SM_WINLEN, SM_POLYORD)
+    return cs_smooth
+
 if __name__ == "__main__":
     # directories
     writedir = gvar.writedir
@@ -325,19 +357,18 @@ if __name__ == "__main__":
     # choosing the window to be wide enough to accommodate
     # the entire cross-spectrum irrespective of ell
     print(f"n1 = {n1}")
-    winhalflen = find_winhalflen(freq, data, l1, l1+4, n1, False)
+    winhalflen = find_winhalflen(freq, data, l1, l1+4, n1, n2, False)
     print(f"winhalflen = {winhalflen}")
     cenfreq, cenfwhm, __ = cdata.findfreq(data, l1, n1, 0)
-    cenfreq2, cenfwhm2, __ = cdata.findfreq(data, l2+6, n1, 0)
-    cenfreq0, cenfwhm0, __ = cdata.findfreq(data, l1-6, n1, 0)
+    cenfreq2, cenfwhm2, __ = cdata.findfreq(data, l2+6, max(n1, n2), 0)
+    cenfreq0, cenfwhm0, __ = cdata.findfreq(data, l1-6, min(n1, n2), 0)
     pmfreq_p = cenfreq2 - cenfreq + (l2+6)*0.7
     pmfreq_n = cenfreq - cenfreq0 + (l2+6)*0.7
     indm = cdata.locatefreq(freq, cenfreq - pmfreq_n)
     indp = cdata.locatefreq(freq, cenfreq + pmfreq_p)
 
     # if fit_bsl:
-    print(f"n1 = {n1}")
-    whlwindow = find_winhalflen(freq, data, l1, l1+4, n1, True)
+    whlwindow = find_winhalflen(freq, data, l1, l1+4, n1, n2, True)
     indm -= extd_pixels + whlwindow
     indp += extd_pixels + whlwindow
 
@@ -356,12 +387,14 @@ if __name__ == "__main__":
         day = 6328 + 72*days
         t1 = time.time()
 
-        afftplus1, afftminus1 = cdata.separatefreq(cdata.loadHMIdata_avg(l1, day=day))
+        afftplus1, afftminus1 = cdata.separatefreq(cdata.loadHMIdata_avg(l1, day=day,
+                                                                         smooth=args.smooth))
 
         if delta_ell == 0:
             afftplus2, afftminus2 = afftplus1, afftminus1
         else:
-            afftplus2, afftminus2 = cdata.separatefreq(cdata.loadHMIdata_avg(l2, day=day))
+            afftplus2, afftminus2 = cdata.separatefreq(cdata.loadHMIdata_avg(l2, day=day,
+                                                                             smooth=args.smooth))
 
         afft1 = afftplus1[:, indm:indp]
         afft2 = afftplus2[:, indm:indp]
@@ -379,6 +412,10 @@ if __name__ == "__main__":
         # computing the cross-spectrum
         csp_temp = afft1.conjugate()*afft2[:(l1+1), :]
         csm_temp = afft1m.conjugate()*afft2m[:(l1+1), :]
+
+#        if args.smooth:
+#            csp_temp = smooth_spectra(csp_temp)
+#            csm_temp = smooth_spectra(csm_temp)
 
         # adding the cross-spectrum (for expectation value computation)
         csp += csp_temp
@@ -419,7 +456,7 @@ if __name__ == "__main__":
             # winhalflen = find_winhalflen(freq, data, l1, l1+4, n1, fit_bsl)
         # else:
         print(f"n1 = {n1}")
-        winhalflen = find_winhalflen(freq, data, l1, l1+4, n1, fit_bsl)
+        winhalflen = find_winhalflen(freq, data, l1, l1+4, n1, n2, fit_bsl)
         print(f"winhalflen = {winhalflen}")
 
         # derotating the cross spectra using the grid without interpolation
@@ -541,7 +578,7 @@ if __name__ == "__main__":
         # plt.show(figi)
 
     # computing winhalflen for fit_bsl=False (without extra pixels)
-    winhalflen = find_winhalflen(freq, data, l1, l1+4, n1, False)
+    winhalflen = find_winhalflen(freq, data, l1, l1+4, n1, n2, False)
     # derotating the cross spectra using the grid without interpolation
     csp, freqp_win = derotate(csp, l1, n1, freq_all, winhalflen, 1)
     csm, freqm_win = derotate(csm, l1, n1, freq_all, winhalflen, -1)
@@ -598,23 +635,22 @@ if __name__ == "__main__":
     #     plt.legend()
     #     plt.tight_layout()
     #     plt.show()
+    fname_suffix = f"_{n1:02d}_{l1:03d}_{l2:03d}"
+    if args.t != 0:
+        fname_suffix += f"_{args.t:03d}"
+    if args.smooth:
+        fname_suffix += f"_smooth"
+    fname_suffix += ".npy"
 
     # storing the spectra
-    if args.t == 0:
-        fp_name = f"{writedir}/csp_data_{n1:02d}_{l1:03d}_{l2:03d}.npy"
-        fm_name = f"{writedir}/csm_data_{n1:02d}_{l1:03d}_{l2:03d}.npy"
-    else:
-        fp_name = f"{writedir}/csp_data_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
-        fm_name = f"{writedir}/csm_data_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
+    fp_name = f"{writedir}/csp_data{fname_suffix}"
+    fm_name = f"{writedir}/csm_data{fname_suffix}"
+    print(fp_name)
     np.save(fp_name, csp)
     np.save(fm_name, csm)
 
     # storing the variance
-    if args.t == 0:
-        fp_name = f"{writedir}/variance_p_{n1:02d}_{l1:03d}_{l2:03d}.npy"
-        fm_name = f"{writedir}/variance_n_{n1:02d}_{l1:03d}_{l2:03d}.npy"
-    else:
-        fp_name = f"{writedir}/variance_p_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
-        fm_name = f"{writedir}/variance_n_{n1:02d}_{l1:03d}_{l2:03d}_{args.t:03d}.npy"
+    fp_name = f"{writedir}/variance_p{fname_suffix}"
+    fm_name = f"{writedir}/variance_n{fname_suffix}"
     np.save(fp_name, variance_p)
     np.save(fm_name, variance_n)
