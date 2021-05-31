@@ -205,8 +205,6 @@ class frequencyBins():
 class crossSpectra():
     """Class to deal with cross-spectral computation from 
     observed data. 
-    - v1.0 = same-n different-ell coupling
-    - v2.0 (future) = different-n different-ell coupling
     Instruments supported: HMI 
     Instrument support for future: MDI, GONG
     """
