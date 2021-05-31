@@ -221,7 +221,7 @@ class crossSpectra():
             l1, n1 = ltemp, ntemp
 
         self.delta_ell = abs(l2 - l1)
-        assert n1 == n2, f"n1 != n2, forcing n2 = {n1}"
+        # assert n1 == n2, f"n1 != n2, forcing n2 = {n1}"
         self.n1, self.n2 = int(n1), int(n2)
         self.l1, self.l2 = int(l1), int(l2)
         self.t, self.dayavgnum = int(t), int(dayavgnum)
