@@ -2,3 +2,5 @@
 jobscripts/ipjobs*
 jobscripts/gnup*
 __pycache__
+src/globalHelioseismology.egg-info/
+
