@@ -242,7 +242,7 @@ def fit_baseline(x, d, n):
     # fitting an nth order quadratic
     G = np.zeros((len(d), n))
     for i in range(n):
-        G[:,i] = x**i
+        G[:, i] = x**i
     
     GTG = G.T @ G
     fit_coeffs = np.linalg.inv(GTG) @ (G.T @ d)

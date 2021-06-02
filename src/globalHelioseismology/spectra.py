@@ -372,6 +372,78 @@ class crossSpectra():
     # }}} finda1(data, l, n, m)
 
 
+    # {{{ def find_maskpeaks4bsl(data, freq, lmin, lmax, n):
+    def find_maskpeaks4bsl(self, freq, lmin, lmax, n1, n2):
+        mask_freq = np.ones(len(freq), dtype=bool)
+        n_arr = np.array([n1, n2])
+        nlw = 5
+        if n1 == 0:
+            for ell in range(lmin-6, lmin+10):
+                f1, fwhm1, a1 = self.od.find_freq(ell, n, 0)
+                mask = (freq < f1 + nlw*fwhm1) * (freq > f1 - nlw*fwhm1)
+                mask_freq[mask] = False
+            return mask_freq
+        else:
+            for ell in range(lmin-6, lmin+10):
+                for n in n_arr:
+                    for enn in range(n-1, n+2):
+                        f1, fwhm1, a1 = self.od.find_freq(ell, enn, 0)
+                        if f1 == None:
+                            continue
+                        else:
+                            mask = (freq < f1 + nlw*fwhm1) * (freq > f1 - nlw*fwhm1)
+                            mask_freq[mask] = False
+            return mask_freq
+    # }}} find_maskpeaks4bsl(data, freq, lmin, lmax, n)
+
+    # {{{ def fit_baseline(x, data, order):
+    def fit_polynomial(self, x, data, order):
+        # fitting an nth order polynomial
+        G = np.zeros((len(data), order))
+        for i in range(order):
+            G[:, i] = x**i
+
+        GTG = G.T @ G
+        fit_coeffs = np.linalg.inv(GTG) @ (G.T @ data)
+        return fit_coeffs
+    # }}} fit_baseline(x, d, n)
+
+
+    # {{{ def find_baselines(self, csp, csn):
+    def find_baseline_coeffs(self, csp, csn):
+        mask_freq_p = self.find_maskpeaks4bsl(self.freq_p[0], self.l1, self.l2,
+                                              self.n1, self.n2)
+        mask_freq_n = self.find_maskpeaks4bsl(self.freq_n[0], self.l1, self.l2,
+                                              self.n1, self.n2)
+        csp_noise = np.sum(csp, axis=0)[mask_freq_p]
+        csn_noise = np.sum(csn, axis=0)[mask_freq_n]
+        freq_p_noise = self.freq_p[0][mask_freq_p]
+        freq_n_noise = self.freq_n[0][mask_freq_n]
+
+        fit_coeffs_p1 = self.fit_polynomial(freq_p_noise, csp_noise.real, 2)
+        fit_coeffs_p2 = self.fit_polynomial(freq_p_noise, csp_noise.imag, 2)
+        fit_coeffs_p = fit_coeffs_p1 + 1j*fit_coeffs_p2
+
+        fit_coeffs_n1 = self.fit_polynomial(freq_n_noise, csn_noise.real, 2)
+        fit_coeffs_n2 = self.fit_polynomial(freq_n_noise, csn_noise.imag, 2)
+        fit_coeffs_n = fit_coeffs_n1 + 1j*fit_coeffs_n2
+        return fit_coeffs_p, fit_coeffs_n
+    # }}} find_baseline_coeffs(self, csp, csn)
+
+
+    # {{{ def get_baseline_from_coeffs(self, bsl_coeffs_p, bsl_coeffs_n):
+    def get_baseline_from_coeffs(self, bsl_coeffs_p, bsl_coeffs_n):
+        bsl_pr = np.polynomial.polynomial.polyval(self.freq_p[0], bsl_coeffs_p.real)
+        bsl_pi = np.polynomial.polynomial.polyval(self.freq_p[0], bsl_coeffs_p.imag)
+        bsl_p = bsl_pr + 1j*bsl_pi
+
+        bsl_nr = np.polynomial.polynomial.polyval(self.freq_n[0], bsl_coeffs_n.real)
+        bsl_ni = np.polynomial.polynomial.polyval(self.freq_n[0], bsl_coeffs_n.imag)
+        bsl_n = bsl_nr + 1j*bsl_ni
+        return bsl_p, bsl_n
+    # }}} get_baseline_from_coeffs(self, bsl_coeffs_p, bsl_coeffs_n)
+
+
     # {{{ def plot_scatter(fig, cs, pm):
     def plot_scatter(self, axs, cs, pm):
         cs1, freqwin = self.derotate(cs, pm)
@@ -380,7 +452,4 @@ class crossSpectra():
                  linewidth=0.8, alpha=0.8)
         return fig
     # }}} plot_scatter(fig, cs, pm)
-
-
-
 
