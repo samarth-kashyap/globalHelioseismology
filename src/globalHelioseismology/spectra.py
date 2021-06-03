@@ -3,6 +3,7 @@ from numpy.polynomial.legendre import legval
 from math import sqrt, pi
 import numpy as np
 import time
+import os
 
 
 __all__ = ["observedData", "frequencyBins", "crossSpectra"]
@@ -119,7 +120,7 @@ class frequencyBins():
                                     f"mode-params/hmi.6328.36")
         self.od = observedData(self.instrument)
 
-    def get_freq_bins(self, num_ts_blocks):
+    def get_freq_bins(self, num_ts_blocks=1):
         """Defines the frequency array for the time series. 
         For the HMI instrument - cadence = 45 seconds.
         For the MDI instrument - ...
@@ -202,6 +203,40 @@ class frequencyBins():
             (idx_derot_diff_n, idx_derot_diff_p)
 
 
+    # {{{ def find_dnu_nlm(data, n, l, m):
+    def find_dnu_nlm(self, n, l, m):
+        """Find a coefficients for given l, n, m (in microHz)
+
+        Inputs:
+        -------
+        (n, l, m)
+        n - int
+            Radial order 
+        l - int
+            Sperical Harmonic degree
+        m - int
+            Azimuthal order 
+
+        Returns:
+        --------
+        diff_nu - float
+            nu_0 - nu_{nlm} in microHz
+        """
+        L = sqrt(l*(l+1))
+        data = self.mode_data
+        try:
+            mode_idx = np.where((data[:, 0] == l) *
+                                (data[:, 1] == n))[0][0]
+        except IndexError:
+            print(f"MODE NOT FOUND : l = {l}, n = {n}")
+            return None, None, None
+        splits = np.append([0.0], data[mode_idx, 12:48])
+        totsplit = legval(1.0*m/L, splits)*L
+        diff_nu = totsplit - 31.7*m
+        return diff_nu * 1e-3
+    # }}} find_dnu_nlm(data, n, l, m)
+
+
 class crossSpectra():
     """Class to deal with cross-spectral computation from 
     observed data. 
@@ -211,7 +246,7 @@ class crossSpectra():
     from astropy.io import fits
 
     def __init__(self, n1, l1, n2, l2, t, instrument="HMI", smooth=False,
-                 daynum=1, dayavgnum=5, fit_bsl=False):
+                 daynum=1, dayavgnum=5, fit_bsl=False, store_spectra=True):
         # swapping values of ell if l2 < l1
         if l2 < l1:
             ltemp, ntemp = l2, n2
@@ -225,6 +260,10 @@ class crossSpectra():
         self.t, self.dayavgnum = int(t), int(dayavgnum)
         self.mode_data = np.loadtxt("/home/g.samarth/globalHelioseismology/" +
                                     f"mode-params/hmi.6328.36")
+        self.dirname = f"/scratch/g.samarth/globalHelioseismology"
+        self.fname_suffix = f"{n1:02d}.{l1:03d}-{n2:02d}.{l2:03d}"
+        if abs(t) > 0:
+            self.fname_suffix += "_{t:03d}"
 
         # observed data relevant to the class instance
         self.od = observedData(instrument)
@@ -235,19 +274,61 @@ class crossSpectra():
         self.freq, (self.idx_n, self.idx_p) = freq, idx_np
         self.idx_diff_n, self.idx_diff_p = idx_diff_np
         self.idx_derot_diff_n, self.idx_derot_diff_p = idx_derot_diff_np
+        if store_spectra:
+            self.store_cross_spectra()
+
+
+    def store_cross_spectra(self):
+        csp, csn, csp2, csn2 = self.compute_cross_spectra()
+        if self.t == 0:
+            csp_summ = csp.sum(axis=0)
+            csn_summ = csn.sum(axis=0)
+        else:
+            csp_summ = csp[self.t:-self.t, :].sum(axis=0)
+            csn_summ = csn[self.t:-self.t, :].sum(axis=0)
+
+        variance_p = ((csp2.real - (csp_summ.real)**2) +
+                        1j*(csp2.imag - (csp_summ.imag)**2))
+        variance_n = ((csn2.real - (csn_summ.real)**2) +
+                        1j*(csn2.imag - (csn_summ.imag)**2))
+
+        unbias_corr = self.dayavgnum/(self.dayavgnum-1)
+        variance_p *= unbias_corr
+        variance_n *= unbias_corr
+
+        l1, l2 = self.l1, self.l2
+        n1, n2 = self.n1, self.n2
+
+        bsl_p, bsl_n = self.find_baseline_coeffs(csp, csn)
+        bslp_spec = np.zeros((1, 4), dtype=np.complex128)
+        bsln_spec = np.zeros((1, 4), dtype=np.complex128)
+        bslp_spec[0, :2] = np.array([self.l1, self.l2])
+        bsln_spec[0, :2] = np.array([self.l1, self.l2])
+        bslp_spec[0, 2:] = bsl_p
+        bsln_spec[0, 2:] = bsl_n
+
+        if not os.path.isdir(f"{self.dirname}/csdata_{self.n1:02d}"):
+            os.mkdir(f"{self.dirname}/csdata_{self.n1:02d}")
+
+        np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                f"csp_data_{self.fname_suffix}.npy", csp_summ)
+        np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                f"csm_data_{self.fname_suffix}.npy", csn_summ)
+        np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                f"variance_p_{self.fname_suffix}.npy", variance_p)
+        np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                f"variance_n_{self.fname_suffix}.npy", variance_n)
+        np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                f"bsl_p_{self.fname_suffix}.npy", bslp_spec)
+        np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                f"bsl_n_{self.fname_suffix}.npy", bsln_spec)
+        return csp_summ, csn_summ, variance_p, variance_n
+
 
     def compute_cross_spectra(self, plot=False):
         csp, csn = 0.0, 0.0
         csp2r, csp2i = 0.0, 0.0
         csn2r, csn2i = 0.0, 0.0
-
-        if plot:
-            self.fig_var_r, (self.axp_r, self.axn_r) = plt.subplots(2, 1,
-                                                                    sharex=True,
-                                                                    figsize=(5, 10))
-            self.fig_var_i, (self.axp_i, self.axn_i) = plt.subplots(2, 1,
-                                                                    sharex=True,
-                                                                    figsize=(5, 10))
 
         for day_idx in range(self.dayavgnum):
             day = 6328 + 72*day_idx
@@ -274,11 +355,6 @@ class crossSpectra():
             # adding the cross-spectrum (for expectation value computation)
             csp += _csp
             csn += _csn
-
-            # self.axp_r = self.plot_scatter(self.axp_r, _csp.real, 1)
-            # self.axn_r = self.plot_scatter(self.axn_r, _csn.real, -1)
-            # self.axp_i = self.plot_scatter(self.axp_i, _csp.imag, 1)
-            # self.axn_i = self.plot_scatter(self.axn_i, _csn.imag, -1)
 
             csp2r += self.compute_d2(_csp.real, 1)
             csp2i += self.compute_d2(_csp.imag, 1)
@@ -339,7 +415,7 @@ class crossSpectra():
         cen_freq, __, __ = self.od.find_freq(l, n, 0)
         m_arr = np.arange(0, sgn*(l+1), sgn)
         for m in m_arr:
-            _nu_nlm = cen_freq + self.finda1(l, m) * 1e-3
+            _nu_nlm = cen_freq + self.finda1(n, l, m) * 1e-3
             _nu_nlm_idx = np.argmin(np.abs(freq - _nu_nlm))
             _idx_min = _nu_nlm_idx - self.idx_derot_diff_n
             _idx_max = _nu_nlm_idx + self.idx_derot_diff_p + 1
@@ -354,13 +430,12 @@ class crossSpectra():
         return phi_derotated, freq_win
     # }}} derotate(phi, l, n, freq, winhalflen, sgn)
 
-    # {{{ def finda1(data, l, n, m):
-    def finda1(self, l, m):
+    # {{{ def finda1(data, n, l, m):
+    def finda1(self, n, l, m):
         """Find a coefficients for given l, n, m
         """
         L = sqrt(l*(l+1))
         data = self.mode_data
-        n = self.n1
         try:
             mode_idx = np.where((data[:, 0] == l) * (data[:, 1] == n))[0][0]
         except IndexError:
@@ -369,7 +444,7 @@ class crossSpectra():
         splits = np.append([0.0], data[mode_idx, 12:48])
         totsplit = legval(1.0*m/L, splits)*L
         return totsplit - 31.7*m
-    # }}} finda1(data, l, n, m)
+    # }}} finda1(data, n, l, m)
 
 
     # {{{ def find_maskpeaks4bsl(data, freq, lmin, lmax, n):

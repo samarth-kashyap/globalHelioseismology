@@ -229,7 +229,8 @@ def derotate(phi, l, n, freq, winhalflen, sgn):
         try:
             freq_win[abs(m)] = freq[_indmin:_indmax]
         except ValueError:
-            print(f"l = {l}, m = {m}, omeganl0_ind = {omeganl0_ind}; _indmin = {_indmin}; _indmax = {_indmax}")
+            print(f"l = {l}, m = {m}, omeganl0_ind = {omeganl0_ind};" +
+                  f"_indmin = {_indmin}; _indmax = {_indmax}")
         _real = phi[abs(m), _indmin-1:_indmax-1].real
         _imag = phi[abs(m), _indmin-1:_indmax-1].imag
         phinew[abs(m), :] = _real + 1j*_imag
