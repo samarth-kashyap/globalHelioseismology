@@ -6,13 +6,11 @@
 Welcome to globalHelioseismology's documentation!
 =================================================
 
-.. automodule:: globalHelioseismology.main
-       :members:
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+globalHelioseismology
 
 
 Indices and tables
