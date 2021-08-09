@@ -245,6 +245,9 @@ class crossSpectra():
     """
     from astropy.io import fits
 
+    __attributes__ = ["n1", "l1", "n2", "l2", "t", "instrument",
+                      "dayavgnum", "od"]
+
     def __init__(self, n1, l1, n2, l2, t, instrument="HMI", smooth=False,
                  daynum=1, dayavgnum=5, fit_bsl=False, store_spectra=True):
         # swapping values of ell if l2 < l1
@@ -284,8 +287,10 @@ class crossSpectra():
             csp_summ = csp.sum(axis=0)
             csn_summ = csn.sum(axis=0)
         else:
-            csp_summ = csp[self.t:-self.t, :].sum(axis=0)
-            csn_summ = csn[self.t:-self.t, :].sum(axis=0)
+            # csp_summ = csp[self.t:-self.t, :].sum(axis=0)
+            # csn_summ = csn[self.t:-self.t, :].sum(axis=0)
+            csp_summ = csp[self.t:, :].sum(axis=0)
+            csn_summ = csn[self.t:, :].sum(axis=0)
 
         variance_p = ((csp2.real - (csp_summ.real)**2) +
                         1j*(csp2.imag - (csp_summ.imag)**2))
@@ -311,9 +316,9 @@ class crossSpectra():
             os.mkdir(f"{self.dirname}/csdata_{self.n1:02d}")
 
         np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                f"csp_data_{self.fname_suffix}.npy", csp_summ)
+                f"csp_data_{self.fname_suffix}.npy", csp)
         np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                f"csm_data_{self.fname_suffix}.npy", csn_summ)
+                f"csm_data_{self.fname_suffix}.npy", csn)
         np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
                 f"variance_p_{self.fname_suffix}.npy", variance_p)
         np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
@@ -454,7 +459,7 @@ class crossSpectra():
         nlw = 5
         if n1 == 0:
             for ell in range(lmin-6, lmin+10):
-                f1, fwhm1, a1 = self.od.find_freq(ell, n, 0)
+                f1, fwhm1, a1 = self.od.find_freq(ell, n1, 0)
                 mask = (freq < f1 + nlw*fwhm1) * (freq > f1 - nlw*fwhm1)
                 mask_freq[mask] = False
             return mask_freq
