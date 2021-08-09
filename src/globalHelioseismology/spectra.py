@@ -202,7 +202,6 @@ class frequencyBins():
         return freq, (idx_n, idx_p), (idx_diff_n, idx_diff_p), \
             (idx_derot_diff_n, idx_derot_diff_p)
 
-
     # {{{ def find_dnu_nlm(data, n, l, m):
     def find_dnu_nlm(self, n, l, m):
         """Find a coefficients for given l, n, m (in microHz)
@@ -280,7 +279,7 @@ class crossSpectra():
         if store_spectra:
             self.store_cross_spectra()
 
-
+    # {{{ def store_cross_spectra(self):
     def store_cross_spectra(self):
         csp, csn, csp2, csn2 = self.compute_cross_spectra()
         if self.t == 0:
@@ -328,8 +327,9 @@ class crossSpectra():
         np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
                 f"bsl_n_{self.fname_suffix}.npy", bsln_spec)
         return csp_summ, csn_summ, variance_p, variance_n
+    # }}} store_cross_spectra(self)
 
-
+    # {{{ def compute_cross_spectra(self, plot=False):
     def compute_cross_spectra(self, plot=False):
         csp, csn = 0.0, 0.0
         csp2r, csp2i = 0.0, 0.0
@@ -381,7 +381,7 @@ class crossSpectra():
         self.freq_n = freq_n
 
         return csp, csn, csp2r+1j*csp2i, csn2r+1j*csn2i
-
+    # }}} compute_cross_spectra(self, plot=False):
 
     # {{{ def compute_d2(cs, pm):
     def compute_d2(self, cs, pm):
@@ -451,7 +451,6 @@ class crossSpectra():
         return totsplit - 31.7*m
     # }}} finda1(data, n, l, m)
 
-
     # {{{ def find_maskpeaks4bsl(data, freq, lmin, lmax, n):
     def find_maskpeaks4bsl(self, freq, lmin, lmax, n1, n2):
         mask_freq = np.ones(len(freq), dtype=bool)
@@ -488,7 +487,6 @@ class crossSpectra():
         return fit_coeffs
     # }}} fit_baseline(x, d, n)
 
-
     # {{{ def find_baselines(self, csp, csn):
     def find_baseline_coeffs(self, csp, csn):
         mask_freq_p = self.find_maskpeaks4bsl(self.freq_p[0], self.l1, self.l2,
@@ -510,7 +508,6 @@ class crossSpectra():
         return fit_coeffs_p, fit_coeffs_n
     # }}} find_baseline_coeffs(self, csp, csn)
 
-
     # {{{ def get_baseline_from_coeffs(self, bsl_coeffs_p, bsl_coeffs_n):
     def get_baseline_from_coeffs(self, bsl_coeffs_p, bsl_coeffs_n):
         bsl_pr = np.polynomial.polynomial.polyval(self.freq_p[0], bsl_coeffs_p.real)
@@ -523,7 +520,6 @@ class crossSpectra():
         return bsl_p, bsl_n
     # }}} get_baseline_from_coeffs(self, bsl_coeffs_p, bsl_coeffs_n)
 
-
     # {{{ def plot_scatter(fig, cs, pm):
     def plot_scatter(self, axs, cs, pm):
         cs1, freqwin = self.derotate(cs, pm)
@@ -532,4 +528,3 @@ class crossSpectra():
                  linewidth=0.8, alpha=0.8)
         return fig
     # }}} plot_scatter(fig, cs, pm)
-
