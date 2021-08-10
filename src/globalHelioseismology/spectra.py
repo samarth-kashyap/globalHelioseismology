@@ -329,6 +329,29 @@ class crossSpectra():
         return csp_summ, csn_summ, variance_p, variance_n
     # }}} store_cross_spectra(self)
 
+    # {{{ def compute_freq_series(self, ell=70, plot=False):
+    def compute_freq_series(self, ell=70, plot=False):
+        for day_idx in range(self.dayavgnum):
+            day = 6328 + 72*day_idx
+
+            afft1p, afft1n = self.od.load_time_series(ell, day=day)
+
+            # windowing in frequency
+            _afft1p = afft1p[:, self.idx_n:self.idx_p]
+            _afft2p = afft2p[:, self.idx_n:self.idx_p]
+
+            # adding the cross-spectrum (for expectation value computation)
+            afft1p += _afft1p
+            afft1n += _afft1n
+
+        afft1p /= self.dayavgnum
+        afft1n /= self.dayavgnum
+
+        afft1p, freq_p = self.derotate(afft1p, 1)
+        afft1n, freq_n = self.derotate(afft1n, -1)
+        return (afft1p, afft1n), (freq_p, freq_n)
+    # }}} compute_freq_series(self, ell=70, plot=False):
+
     # {{{ def compute_cross_spectra(self, plot=False):
     def compute_cross_spectra(self, plot=False):
         csp, csn = 0.0, 0.0
