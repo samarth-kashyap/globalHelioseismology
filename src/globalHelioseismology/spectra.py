@@ -1,16 +1,21 @@
 from astropy.io import fits
 from numpy.polynomial.legendre import legval
 from math import sqrt, pi
+from .ctol import rotate_map
+import healpy as hp
 import numpy as np
 import time
 import os
 
 
-__all__ = ["observedData", "frequencyBins", "crossSpectra"]
+__all__ = ["observedData",
+           "frequencyBins",
+           "crossSpectra"]
 
 
 class observedData():
-    __all__ = ["find_freq", "load_time_series"]
+    __all__ = ["find_freq",
+               "load_time_series"]
 
     from scipy.signal import savgol_filter as savgol
     WINLEN = 25
@@ -244,7 +249,9 @@ class crossSpectra():
     """
     from astropy.io import fits
 
-    __attributes__ = ["n1", "l1", "n2", "l2", "t", "instrument",
+    __attributes__ = ["n1", "l1",
+                      "n2", "l2", "t",
+                      "instrument",
                       "dayavgnum", "od"]
 
     def __init__(self, n1, l1, n2, l2, t, instrument="HMI", smooth=False,
@@ -330,15 +337,18 @@ class crossSpectra():
     # }}} store_cross_spectra(self)
 
     # {{{ def compute_freq_series(self, ell=70, plot=False):
-    def compute_freq_series(self, ell=70, plot=False):
+    def compute_freq_series(self, ell=70, plot=False, rotated=False,
+                            euler_angle=np.array([0, -np.pi/2.0, 0.0])):
+        print(ell)
+        afft1p, afft1n = 0, 0
         for day_idx in range(self.dayavgnum):
             day = 6328 + 72*day_idx
 
-            afft1p, afft1n = self.od.load_time_series(ell, day=day)
+            _afft1p, _afft1n = self.od.load_time_series(ell, day=day)
 
             # windowing in frequency
-            _afft1p = afft1p[:, self.idx_n:self.idx_p]
-            _afft2p = afft2p[:, self.idx_n:self.idx_p]
+            _afft1p = _afft1p[:, self.idx_n:self.idx_p]
+            _afft1n = _afft1n[:, self.idx_n:self.idx_p]
 
             # adding the cross-spectrum (for expectation value computation)
             afft1p += _afft1p
@@ -346,6 +356,28 @@ class crossSpectra():
 
         afft1p /= self.dayavgnum
         afft1n /= self.dayavgnum
+
+        if rotated:
+            _nsidearr = np.array([2, 4, 8, 16, 32, 64, 128])
+            _lmaxarr = 3*_nsidearr - 1
+            _elldiff = _lmaxarr - ell
+            _nsidearr[_elldiff < 0] = 100000000
+            _nside_idx = np.argmin(_nsidearr)
+            NSIDE = _nsidearr[_nside_idx]
+            LMAX = _lmaxarr[_nside_idx]
+            ellArr, emmArr = hp.sphtfunc.Alm.getlm(LMAX)
+            almp = np.zeros(len(ellArr), dtype=np.complex128)
+            almn = np.zeros(len(ellArr), dtype=np.complex128)
+            mask_ell = ellArr == ell
+            num_bins = afft1p.shape[1]
+            r = hp.rotator.Rotator(euler_angle, deg=False, eulertype='zyz')
+            for idx in range(num_bins):
+                almp[mask_ell] = afft1p[:, idx]
+                almn[mask_ell] = afft1n[:, idx]
+                almp = r.rotate_alm(almp)
+                almn = r.rotate_alm(almn)
+                afft1p[:, idx] = almp[mask_ell]
+                afft1n[:, idx] = almn[mask_ell]
 
         afft1p, freq_p = self.derotate(afft1p, 1)
         afft1n, freq_n = self.derotate(afft1n, -1)

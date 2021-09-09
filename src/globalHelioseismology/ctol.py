@@ -47,7 +47,7 @@ def rotate_map_old(hmap, rot_theta, rot_phi):
     return rot_map
 
 
-def rotate_map(hmap, euler_angle=np.array([0, -np.pi/2.0, 0.0])):
+def rotate_map(hmap, euler_angle=np.array([0, -np.pi/4.0, 0.0])):
     """
     Take hmap (a healpix map array) and return another healpix map array 
     which is ordered such that it has been rotated in (theta, phi) by the 
@@ -59,7 +59,8 @@ def rotate_map(hmap, euler_angle=np.array([0, -np.pi/2.0, 0.0])):
     t, p = hp.pix2ang(nside, np.arange(hp.nside2npix(nside))) #theta, phi
 
     # Define a rotator
-    r = hp.rotator.Rotator(euler_angle, deg=False, eulertype='zxz')
+    r = hp.rotator.Rotator(euler_angle, deg=False, eulertype='zyz')
+    print(f'type = zyz')
 
     # Get theta, phi under rotated co-ordinates
     trot, prot = r(t,p)
@@ -68,8 +69,6 @@ def rotate_map(hmap, euler_angle=np.array([0, -np.pi/2.0, 0.0])):
     rot_map = hp.get_interp_val(hmap, trot, prot)
 
     return rot_map
-
-
 
 
 class CtoL():
