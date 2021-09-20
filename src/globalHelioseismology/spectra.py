@@ -272,7 +272,7 @@ class crossSpectra():
         self.dirname = f"/scratch/g.samarth/globalHelioseismology"
         self.fname_suffix = f"{n1:02d}.{l1:03d}-{n2:02d}.{l2:03d}"
         if abs(t) > 0:
-            self.fname_suffix += "_{t:03d}"
+            self.fname_suffix += f"_{t:03d}"
 
         # observed data relevant to the class instance
         self.od = observedData(instrument)
@@ -321,20 +321,24 @@ class crossSpectra():
         if not os.path.isdir(f"{self.dirname}/csdata_{self.n1:02d}"):
             os.mkdir(f"{self.dirname}/csdata_{self.n1:02d}")
 
-        np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                f"csp_data_{self.fname_suffix}.npy", csp)
-        np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                f"csm_data_{self.fname_suffix}.npy", csn)
-        np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                f"variance_p_{self.fname_suffix}.npy", variance_p)
-        np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                f"variance_n_{self.fname_suffix}.npy", variance_n)
-        np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                f"bsl_p_{self.fname_suffix}.npy", bslp_spec)
-        np.save(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                f"bsl_n_{self.fname_suffix}.npy", bsln_spec)
+        self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                       f"csp_data_{self.fname_suffix}.npy", csp)
+        self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                       f"csm_data_{self.fname_suffix}.npy", csn)
+        self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                       f"variance_p_{self.fname_suffix}.npy", variance_p)
+        self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                       f"variance_n_{self.fname_suffix}.npy", variance_n)
+        self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                       f"bsl_p_{self.fname_suffix}.npy", bslp_spec)
+        self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                       f"bsl_n_{self.fname_suffix}.npy", bsln_spec)
         return csp_summ, csn_summ, variance_p, variance_n
     # }}} store_cross_spectra(self)
+
+    def save_data(self, fname, data, info=True):
+        np.save(fname, data)
+        print(f"Saving {fname}")
 
     # {{{ def compute_freq_series(self, ell=70, plot=False):
     def compute_freq_series(self, ell=70, plot=False, rotated=False,
@@ -441,7 +445,10 @@ class crossSpectra():
     # {{{ def compute_d2(cs, pm):
     def compute_d2(self, cs, pm):
         csp1, freqp_win = self.derotate(cs, pm)
-        csp = csp1.sum(axis=0)
+        if self.t == 0:
+            csp = csp1.sum(axis=0)
+        else:
+            csp = csp1[self.t:, :].sum(axis=0)
         return csp**2
     # }}} compute_d2(cs, pm)
 
