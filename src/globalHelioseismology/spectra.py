@@ -295,8 +295,8 @@ class crossSpectra():
         else:
             # csp_summ = csp[self.t:-self.t, :].sum(axis=0)
             # csn_summ = csn[self.t:-self.t, :].sum(axis=0)
-            csp_summ = csp[self.t:, :].sum(axis=0)
-            csn_summ = csn[self.t:, :].sum(axis=0)
+            csp_summ = csp[:-self.t, :].sum(axis=0)
+            csn_summ = csn[:-self.t, :].sum(axis=0)
 
         variance_p = ((csp2.real - (csp_summ.real)**2) +
                         1j*(csp2.imag - (csp_summ.imag)**2))
@@ -448,7 +448,7 @@ class crossSpectra():
         if self.t == 0:
             csp = csp1.sum(axis=0)
         else:
-            csp = csp1[self.t:, :].sum(axis=0)
+            csp = csp1[:-self.t, :].sum(axis=0)
         return csp**2
     # }}} compute_d2(cs, pm)
 
