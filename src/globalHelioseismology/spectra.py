@@ -7,6 +7,10 @@ import numpy as np
 import time
 import os
 
+current_dir = os.path.dirname(os.path.realpath(__file__))
+package_dir = os.path.dirname(os.path.dirname(current_dir))
+with open(f"{package_dir}/.config", "r") as f:
+    data_dir = f.readlines()[0].split("\n")[0]
 
 __all__ = ["observedData",
            "frequencyBins",
@@ -17,16 +21,26 @@ class observedData():
     __all__ = ["find_freq",
                "load_time_series"]
 
+    __methods__ = ["find_freq",
+                   "load_time_series"]
+
+    __attributes__ = ["data",
+                      "ts_datadir",
+                      "WINLEN",
+                      "POLYORD"]
+
+    #---- Savitzky-Golay filter for smoothening data ----
     from scipy.signal import savgol_filter as savgol
     WINLEN = 25
     POLYORD = 5
+    # --------------------------------------------------
+
     def __init__(self, instrument="HMI"):
         self.instrument = instrument
 
         if instrument == "HMI":
-            self.data = np.loadtxt("/home/g.samarth/globalHelioseismology/" +
-                                   f"mode-params/hmi.6328.36")
-            self.ts_datadir = "/scratch/seismogroup/data/HMI/data"
+            self.data = np.loadtxt(f"{package_dir}/mode-params/hmi.6328.36")
+            self.ts_datadir = data_dir
 
     # {{{ def find_freq(self, l, n, m):
     def find_freq(self, l, n, m):
@@ -113,6 +127,16 @@ class observedData():
 
 
 class frequencyBins():
+    __attributes__ = ["n1", "l1", "n2", "l2",
+                      "instrument",
+                      "freq_bins_global",
+                      "mode_data",
+                      "od"]
+
+    __methods__ = ["get_freq_bins",
+                   "window_freq",
+                   "find_dnu_nlm"]
+
     def __init__(self, n1, l1, n2, l2,
                  instrument="HMI"):
         self.n1, self.n2 = n1, n2
@@ -121,10 +145,10 @@ class frequencyBins():
         self.freq_bins_global = None
         self.get_freq_bins(1)
         if instrument == "HMI":
-            self.mode_data = np.loadtxt("/home/g.samarth/globalHelioseismology/" +
-                                    f"mode-params/hmi.6328.36")
+            self.mode_data = np.loadtxt(f"{package_dir}/mode-params/hmi.6328.36")
         self.od = observedData(self.instrument)
 
+    # {{{ def get_freq_bins(self, num_ts_blocks=1)
     def get_freq_bins(self, num_ts_blocks=1):
         """Defines the frequency array for the time series. 
         For the HMI instrument - cadence = 45 seconds.
@@ -148,7 +172,9 @@ class frequencyBins():
         df = freq[1] - freq[0]  # frequencies in microHz
         self.freq_bins_global = freq
         return freq
+    # }}} get_freq_bins
 
+    # {{{ def window_freq(self)
     def window_freq(self):
         """Window the frequency bins such that only region around expected
         signal is retained.
@@ -172,6 +198,10 @@ class frequencyBins():
         num_lw = 5
         mode1freq, __, __ = self.od.find_freq(self.l1, self.n1, 0)
         mode2freq, __, __ = self.od.find_freq(self.l2, self.n2, 0)
+
+        # obtaining the central, left and right frequencies
+        cen_freq, cen_fwhm, __ = self.od.find_freq(self.l1, self.n1, 0)
+
         if mode2freq > mode1freq:
             right_freq, right_fwhm, __ = self.od.find_freq(self.l2+6, self.n2, 0)
             left_freq, left_fwhm, __ = self.od.find_freq(self.l1-6, self.n1, 0)
@@ -179,17 +209,19 @@ class frequencyBins():
             right_freq, right_fwhm, __ = self.od.find_freq(self.l1+6, self.n1, 0)
             left_freq, left_fwhm, __ = self.od.find_freq(self.l2-6, self.n2, 0)
 
-        cen_freq, cen_fwhm, __ = self.od.find_freq(self.l1, self.n1, 0)
         pmfreq_p = right_freq - cen_freq + (self.l2+6)*0.7 + right_fwhm*num_lw
         pmfreq_n = cen_freq - left_freq + (self.l2+6)*0.7 + left_fwhm*num_lw
+
         idx_n = np.argmin(abs(self.freq_bins_global - (cen_freq - pmfreq_n)))
         idx_p = np.argmin(abs(self.freq_bins_global - (cen_freq + pmfreq_p)))
         idx_0 = np.argmin(abs(self.freq_bins_global - cen_freq))
+
         idx_diff_p = idx_p - idx_0
         idx_diff_n = idx_0 - idx_n
 
         print(f"freqmin = {self.freq_bins_global[idx_n]}; " +
               f"freqmax = {self.freq_bins_global[idx_p]}")
+
         # frequency bins for the un-derotated signal
         freq = self.freq_bins_global[idx_n:idx_p]*1.0
         self.idx_n, self.idx_p = int(idx_n), int(idx_p)
@@ -206,8 +238,9 @@ class frequencyBins():
         self.idx_derot_np = (idx_derot_diff_n, idx_derot_diff_p)
         return freq, (idx_n, idx_p), (idx_diff_n, idx_diff_p), \
             (idx_derot_diff_n, idx_derot_diff_p)
+    # }}} window_freq
 
-    # {{{ def find_dnu_nlm(data, n, l, m):
+    # {{{ def find_dnu_nlm(data, n, l, m)
     def find_dnu_nlm(self, n, l, m):
         """Find a coefficients for given l, n, m (in microHz)
 
@@ -253,6 +286,18 @@ class crossSpectra():
                       "n2", "l2", "t",
                       "instrument",
                       "dayavgnum", "od"]
+
+    __methods__ = ["store_cross_spectra",
+                   "save_data",
+                   "compute_freq_series",
+                   "compute_d2",
+                   "derotate",
+                   "finda1",
+                   "find_maskpeaks4bsl",
+                   "fit_polynomial",
+                   "find_baseline_coeffs",
+                   "get_baseline_from_coeffs",
+                   "plot_scatter"]
 
     def __init__(self, n1, l1, n2, l2, t, instrument="HMI", smooth=False,
                  daynum=1, dayavgnum=5, fit_bsl=False, store_spectra=True):
