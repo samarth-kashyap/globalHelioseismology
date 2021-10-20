@@ -12,10 +12,10 @@ def gen_leg_x(lmax, x):
     ell = np.arange(max_index)
     norm = np.sqrt(ell*(ell+1)).reshape(max_index, 1)
     norm[norm == 0] = 1.0
-    
+
     leg = np.zeros((max_index, x.size))
     leg_d1 = np.zeros((max_index, x.size))
-    
+
     count = 0
     for z in x:
         leg[:, count], leg_d1[:, count] = pleg.PlBar_d1(lmax, z)
@@ -72,8 +72,12 @@ def rotate_map(hmap, euler_angle=np.array([0, -np.pi/4.0, 0.0])):
 
 
 class CtoL():
-    __all__ = ["get_ctol", "get_sph_coeffs"]
-    __attributes__ = ["b_angle", "th", "ctol"]
+    __all__ = ["get_ctol",
+               "get_sph_coeffs"]
+
+    __attributes__ = ["b_angle",
+                      "th",
+                      "ctol"]
 
     def __init__(self, b_angle=0.0, NSIDE=64):
         self.b_angle = b_angle

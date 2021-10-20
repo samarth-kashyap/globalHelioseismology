@@ -1,7 +1,6 @@
 from astropy.io import fits
 from numpy.polynomial.legendre import legval
 from math import sqrt, pi
-from .ctol import rotate_map
 import healpy as hp
 import numpy as np
 import time
@@ -299,7 +298,7 @@ class crossSpectra():
                    "get_baseline_from_coeffs",
                    "plot_scatter"]
 
-    def __init__(self, n1, l1, n2, l2, t, instrument="HMI", smooth=False,
+    def __init__(self, n1, l1, n2, l2, t=0, instrument="HMI", smooth=False,
                  daynum=1, dayavgnum=5, fit_bsl=False, store_spectra=True):
         # swapping values of ell if l2 < l1
         if l2 < l1:
@@ -316,8 +315,8 @@ class crossSpectra():
                                     f"mode-params/hmi.6328.36")
         self.dirname = f"/scratch/g.samarth/globalHelioseismology"
         self.fname_suffix = f"{n1:02d}.{l1:03d}-{n2:02d}.{l2:03d}"
-        if abs(t) > 0:
-            self.fname_suffix += f"_{t:03d}"
+        if abs(self.t) > 0:
+            self.fname_suffix += f"_{self.t:03d}"
 
         # observed data relevant to the class instance
         self.od = observedData(instrument)
@@ -388,7 +387,35 @@ class crossSpectra():
     # {{{ def compute_freq_series(self, ell=70, plot=False):
     def compute_freq_series(self, ell=70, plot=False, rotated=False,
                             euler_angle=np.array([0, -np.pi/2.0, 0.0])):
-        print(ell)
+        """Computest the frequency series corresponding to the spherical
+        harmonic time-series obtained from the observatory pipeline.
+        p-angle correction can also be performed using the "rotated" flag
+
+        Inputs:
+        -------
+        ell - int
+            spherical harmonic degree
+        plot - bool
+            boolean switch for plotting
+        rotated - bool
+            boolean switch for rotation of spherical harmonics
+            set rotated=True for performing rotation for a given 
+            euler_angle. Useful for p-angle correction.
+        euler_angle - np.ndarray(ndim=1, dtype=np.float64)
+            the euler angle for rotation of spherical harmonics.
+
+        Returns:
+        --------
+        (afft1p, afft1n), (freq_p, freq_n)
+        afft1p - np.ndarray(ndim=2, dtype=np.complex128)
+            derotated fourier transform of \phi_{lm}(t) for +ve m 
+        afft1n - np.ndarray(ndim=2, dtype=np.complex128)
+            derotated fourier transform of \phi_{lm}(t) for -ve m 
+        freq_p - np.ndarray(ndim=1, dtype=np.float64)
+            frequency series corresponding to the derotated spectra for +ve m
+        freq_n - np.ndarray(ndim=2, dtype=np.complex128)
+            frequency series corresponding to the derotated spectra for -ve m
+        """
         afft1p, afft1n = 0, 0
         for day_idx in range(self.dayavgnum):
             day = 6328 + 72*day_idx
