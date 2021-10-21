@@ -591,13 +591,13 @@ class crossSpectra():
         n_arr = np.array([n1, n2])
         nlw = 5
         if n1 == 0:
-            for ell in range(lmin-6, lmin+10):
+            for ell in range(lmin-6, lmax+6):
                 f1, fwhm1, a1 = self.od.find_freq(ell, n1, 0)
                 mask = (freq < f1 + nlw*fwhm1) * (freq > f1 - nlw*fwhm1)
                 mask_freq[mask] = False
             return mask_freq
         else:
-            for ell in range(lmin-6, lmin+10):
+            for ell in range(lmin-6, lmax+6):
                 for n in n_arr:
                     for enn in range(n-1, n+2):
                         f1, fwhm1, a1 = self.od.find_freq(ell, enn, 0)
@@ -631,6 +631,7 @@ class crossSpectra():
         csn_noise = np.sum(csn, axis=0)[mask_freq_n]
         freq_p_noise = self.freq_p[0][mask_freq_p]
         freq_n_noise = self.freq_n[0][mask_freq_n]
+        print(freq_p_noise, freq_n_noise)
 
         fit_coeffs_p1 = self.fit_polynomial(freq_p_noise, csp_noise.real, 2)
         fit_coeffs_p2 = self.fit_polynomial(freq_p_noise, csp_noise.imag, 2)
