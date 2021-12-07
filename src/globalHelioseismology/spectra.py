@@ -1,5 +1,6 @@
-from astropy.io import fits
 from numpy.polynomial.legendre import legval
+from astropy.io import fits
+import matplotlib.pyplot as plt
 from math import sqrt, pi
 import healpy as hp
 import numpy as np
@@ -299,12 +300,16 @@ class crossSpectra():
                    "plot_scatter"]
 
     def __init__(self, n1, l1, n2, l2, t=0, instrument="HMI", smooth=False,
-                 daynum=1, dayavgnum=5, fit_bsl=False, store_spectra=True):
+                 daynum=1, dayavgnum=5, fit_bsl=False, store_spectra=True,
+                 plot_data=True, plot_snr=True):
         # swapping values of ell if l2 < l1
         if l2 < l1:
             ltemp, ntemp = l2, n2
             l2, n2 = l1, n1
             l1, n1 = ltemp, ntemp
+
+        self.plot_data = plot_data
+        self.plot_snr = plot_snr
 
         self.delta_ell = abs(l2 - l1)
         # assert n1 == n2, f"n1 != n2, forcing n2 = {n1}"
@@ -318,6 +323,38 @@ class crossSpectra():
         if abs(self.t) > 0:
             self.fname_suffix += f"_{self.t:03d}"
 
+        if plot_data:
+            if not os.path.isdir(f"{self.dirname}/plots/csplot_{self.n1:02d}"):
+                os.mkdir(f"{self.dirname}/plots/csplot_{self.n1:02d}")
+            fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(10, 10))
+            self.fig = fig
+            self.axs = axs.flatten()
+            self.fig.suptitle(f"Spectra for $(n_1, \ell_1)$ = ({self.n1}, {self.l1})" +
+                              f" and $(n_2, \ell_2)$ = ({self.n2}, {self.l2})")
+            self.axs[0].set_title("Real spectra, $m >= 0$")
+            self.axs[1].set_title("Real spectra, $m <= 0$")
+            self.axs[2].set_title("Imag spectra, $m >= 0$")
+            self.axs[3].set_title("Imag spectra, $m <= 0$")
+            for i in range(len(self.axs)):
+                self.axs[i].set_xlabel("Frequency in $\mu$Hz")
+                self.axs[i].ticklabel_format(axis='y', style='sci', scilimits=(-2, 2))
+            self.fig.tight_layout()
+
+        if plot_snr:
+            fig_snr, axs_snr = plt.subplots(nrows=2, ncols=2, figsize=(10, 10))
+            self.fig_snr = fig_snr
+            self.axs_snr = axs_snr.flatten()
+            self.fig_snr.suptitle(f"S/N ratio $(n_1, \ell_1)$ = ({self.n1}, {self.l1})" +
+                                  f" and $(n_2, \ell_2)$ = ({self.n2}, {self.l2})")
+            self.axs_snr[0].set_title("Real spectra, $m >= 0$")
+            self.axs_snr[1].set_title("Real spectra, $m <= 0$")
+            self.axs_snr[2].set_title("Imag spectra, $m >= 0$")
+            self.axs_snr[3].set_title("Imag spectra, $m <= 0$")
+            for i in range(len(self.axs)):
+                self.axs_snr[i].set_xlabel("Frequency in $\mu$Hz")
+                self.axs_snr[i].ticklabel_format(axis='y', style='sci', scilimits=(-2, 2))
+            self.fig_snr.tight_layout()
+
         # observed data relevant to the class instance
         self.od = observedData(instrument)
 
@@ -329,6 +366,10 @@ class crossSpectra():
         self.idx_derot_diff_n, self.idx_derot_diff_p = idx_derot_diff_np
         if store_spectra:
             self.store_cross_spectra()
+            self.fig.savefig(f"{self.dirname}/plots/csplot_{self.n1:02d}/csplot_" +
+                             f"{self.fname_suffix}.png")
+            self.fig_snr.savefig(f"{self.dirname}/plots/csplot_{self.n1:02d}/snrplot_" +
+                                 f"{self.fname_suffix}.png")
 
     # {{{ def store_cross_spectra(self):
     def store_cross_spectra(self):
@@ -362,6 +403,40 @@ class crossSpectra():
         bslp_spec[0, 2:] = bsl_p
         bsln_spec[0, 2:] = bsl_n
 
+        snr_p, snr_r = self.compute_snr((csp_summ, csn_summ),
+                                        (variance_p, variance_n))
+
+        if self.plot_data:
+            self.axs[0].fill_between(self.freq_p[0],
+                                     csp_summ.real - np.sqrt(variance_p.real),
+                                     csp_summ.real + np.sqrt(variance_p.real),
+                                     color='g', alpha=0.9)
+            self.axs[0].plot(self.freq_p[0], csp_summ.real, 'r', linewidth=0.7)
+
+            self.axs[1].fill_between(self.freq_n[0],
+                                     csn_summ.real - np.sqrt(variance_n.real),
+                                     csn_summ.real + np.sqrt(variance_n.real),
+                                     color='g', alpha=0.9)
+            self.axs[1].plot(self.freq_n[0], csn_summ.real, 'r', linewidth=0.7)
+
+            self.axs[2].fill_between(self.freq_p[0],
+                                     csp_summ.imag - np.sqrt(variance_p.imag),
+                                     csp_summ.imag + np.sqrt(variance_p.imag),
+                                     color='g', alpha=0.9)
+            self.axs[2].plot(self.freq_p[0], csp_summ.imag, 'r', linewidth=0.7)
+
+            self.axs[3].fill_between(self.freq_n[0],
+                                     csn_summ.imag - np.sqrt(variance_n.imag),
+                                     csn_summ.imag + np.sqrt(variance_n.imag),
+                                     color='g', alpha=0.9)
+            self.axs[3].plot(self.freq_n[0], csn_summ.imag, 'r', linewidth=0.7)
+
+            _bslp, _bsln = self.get_baseline_from_coeffs(bsl_p, bsl_n)
+            self.axs[0].plot(self.freq_p[0], _bslp.real, '--y')
+            self.axs[1].plot(self.freq_n[0], _bsln.real, '--y')
+            self.axs[2].plot(self.freq_p[0], _bslp.imag, '--y')
+            self.axs[3].plot(self.freq_n[0], _bsln.imag, '--y')
+
         if not os.path.isdir(f"{self.dirname}/csdata_{self.n1:02d}"):
             os.mkdir(f"{self.dirname}/csdata_{self.n1:02d}")
 
@@ -377,8 +452,58 @@ class crossSpectra():
                        f"bsl_p_{self.fname_suffix}.npy", bslp_spec)
         self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
                        f"bsl_n_{self.fname_suffix}.npy", bsln_spec)
-        return csp_summ, csn_summ, variance_p, variance_n
+        self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                       f"snrp_{self.fname_suffix}.npy", bsln_spec)
+        self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                       f"snrn_{self.fname_suffix}.npy", bsln_spec)
+        return csp_summ, csn_summ, variance_p, variance_n, bsl_p, bsl_n
     # }}} store_cross_spectra(self)
+
+    def compute_snr(self, cspn, varpn, snr_thresh=0.5):
+        csp, csn = cspn
+        varp, varn = varpn
+
+        def mask_small(yval, threshold=5e-2):
+            maxval = abs(yval).max()
+            limval = threshold*maxval
+            mask = abs(yval) > limval
+            return mask
+
+        snr_p1 = abs(csp.real)**2/varp.real
+        snr_p2 = abs(csp.imag)**2/varp.imag
+        snr_n1 = abs(csn.real)**2/varn.real
+        snr_n2 = abs(csn.imag)**2/varn.imag
+
+        mask_p1 = mask_small(abs(csp.real)**2)
+        mask_p2 = mask_small(abs(csp.imag)**2)
+        mask_n1 = mask_small(abs(csn.real)**2)
+        mask_n2 = mask_small(abs(csn.imag)**2)
+
+        snr_p1[~mask_p1] = 0
+        snr_p2[~mask_p2] = 0
+        snr_n1[~mask_n1] = 0
+        snr_n2[~mask_n2] = 0
+
+        snr_p1[snr_p1 < snr_thresh] = np.nan
+        snr_n1[snr_n1 < snr_thresh] = np.nan
+        snr_p2[snr_p2 < snr_thresh] = np.nan
+        snr_n2[snr_n2 < snr_thresh] = np.nan
+
+        snr_p = snr_p1 + 1j*snr_p2
+        snr_n = snr_n1 + 1j*snr_n2
+
+        if self.plot_snr:
+            self.axs_snr[0].plot(self.freq_p[0], snr_p.real, 'xk', linewidth=0.7)
+            self.axs_snr[0].set_xlim([self.freq_p[0][0], self.freq_p[0][-1]])
+            self.axs_snr[1].plot(self.freq_n[0], snr_n.real, 'xk', linewidth=0.7)
+            self.axs_snr[1].set_xlim([self.freq_n[0][0], self.freq_n[0][-1]])
+            self.axs_snr[2].plot(self.freq_p[0], snr_p.imag, 'xk', linewidth=0.7)
+            self.axs_snr[2].set_xlim([self.freq_p[0][0], self.freq_p[0][-1]])
+            self.axs_snr[3].plot(self.freq_n[0], snr_n.imag, 'xk', linewidth=0.7)
+            self.axs_snr[3].set_xlim([self.freq_n[0][0], self.freq_n[0][-1]])
+
+        return snr_p, snr_n
+
 
     def save_data(self, fname, data, info=True):
         np.save(fname, data)
@@ -487,6 +612,7 @@ class crossSpectra():
             # computing the cross-spectrum
             _csp = afft1p.conjugate()*afft2p[:(self.l1+1), :]
             _csn = afft1n.conjugate()*afft2n[:(self.l1+1), :]
+            self.plot_scatter(_csp, _csn)
 
             # adding the cross-spectrum (for expectation value computation)
             csp += _csp
@@ -588,6 +714,7 @@ class crossSpectra():
     # {{{ def find_maskpeaks4bsl(data, freq, lmin, lmax, n):
     def find_maskpeaks4bsl(self, freq, lmin, lmax, n1, n2):
         mask_freq = np.ones(len(freq), dtype=bool)
+        halflen = len(freq)//2
         n_arr = np.array([n1, n2])
         nlw = 5
         if n1 == 0:
@@ -595,7 +722,7 @@ class crossSpectra():
                 f1, fwhm1, a1 = self.od.find_freq(ell, n1, 0)
                 mask = (freq < f1 + nlw*fwhm1) * (freq > f1 - nlw*fwhm1)
                 mask_freq[mask] = False
-            return mask_freq
+            # return mask_freq
         else:
             for ell in range(lmin-6, lmax+6):
                 for n in n_arr:
@@ -606,7 +733,14 @@ class crossSpectra():
                         else:
                             mask = (freq < f1 + nlw*fwhm1) * (freq > f1 - nlw*fwhm1)
                             mask_freq[mask] = False
-            return mask_freq
+            # return mask_freq
+        left_sum = mask_freq[:halflen].sum()
+        right_sum = mask_freq[halflen:].sum()
+        if left_sum == 0:
+            mask_freq[5] = True
+        if right_sum == 0:
+            mask_freq[-5] = True
+        return mask_freq
     # }}} find_maskpeaks4bsl(data, freq, lmin, lmax, n)
 
     # {{{ def fit_baseline(x, data, order):
@@ -631,7 +765,6 @@ class crossSpectra():
         csn_noise = np.sum(csn, axis=0)[mask_freq_n]
         freq_p_noise = self.freq_p[0][mask_freq_p]
         freq_n_noise = self.freq_n[0][mask_freq_n]
-        print(freq_p_noise, freq_n_noise)
 
         fit_coeffs_p1 = self.fit_polynomial(freq_p_noise, csp_noise.real, 2)
         fit_coeffs_p2 = self.fit_polynomial(freq_p_noise, csp_noise.imag, 2)
@@ -655,11 +788,22 @@ class crossSpectra():
         return bsl_p, bsl_n
     # }}} get_baseline_from_coeffs(self, bsl_coeffs_p, bsl_coeffs_n)
 
-    # {{{ def plot_scatter(fig, cs, pm):
-    def plot_scatter(self, axs, cs, pm):
-        cs1, freqwin = self.derotate(cs, pm)
+    # {{{ def plot_scatter(self, csp, csn):
+    def plot_scatter(self, csp, csn):
+        cs1, freqwin1 = self.derotate(csp, 1)
+        cs2, freqwin2 = self.derotate(csn, -1)
+
         cs1sum = cs1.sum(axis=0)
-        axs.plot(freqwin[0, :], cs1sum.real, '.b', markersize=0.8,
-                 linewidth=0.8, alpha=0.8)
-        return fig
-    # }}} plot_scatter(fig, cs, pm)
+        cs2sum = cs2.sum(axis=0)
+
+        self.axs[0].plot(freqwin1[0, :], cs1sum.real, '+b',
+                         markersize=0.8, linewidth=0.8, alpha=0.6)
+        self.axs[1].plot(freqwin2[0, :], cs2sum.real, '+b',
+                         markersize=0.8, linewidth=0.8, alpha=0.6)
+
+        self.axs[2].plot(freqwin1[0, :], cs1sum.imag, '+b',
+                         markersize=0.8, linewidth=0.8, alpha=0.6)
+        self.axs[3].plot(freqwin2[0, :], cs2sum.imag, '+b',
+                         markersize=0.8, linewidth=0.8, alpha=0.6)
+        return None
+    # }}} plot_scatter(self, cs, pm)
