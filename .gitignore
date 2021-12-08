@@ -6,4 +6,5 @@ src/globalHelioseismology.egg-info/
 .ipynb_checkpoints
 pip-wheel-metadata
 .config
+*.sh
 

@@ -1,275 +1,275 @@
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 144 --lp 146 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 157 --lp 159 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 157 --lp 161 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 158 --lp 160 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 158 --lp 162 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 159 --lp 161 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 159 --lp 163 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 160 --lp 162 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 160 --lp 164 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 161 --lp 163 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 162 --lp 164 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 162 --lp 166 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 163 --lp 167 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 164 --lp 166 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 164 --lp 168 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 166 --lp 168 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 166 --lp 170 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 167 --lp 169 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 167 --lp 171 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 168 --lp 170 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 168 --lp 172 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 169 --lp 171 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 169 --lp 173 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 170 --lp 172 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 170 --lp 174 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 171 --lp 173 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 171 --lp 175 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 172 --lp 174 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 172 --lp 176 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 173 --lp 175 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 173 --lp 177 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 174 --lp 176 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 174 --lp 178 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 175 --lp 177 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 175 --lp 179 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 176 --lp 178 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 176 --lp 180 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 177 --lp 179 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 177 --lp 181 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 178 --lp 180 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 178 --lp 182 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 179 --lp 181 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 179 --lp 183 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 180 --lp 182 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 181 --lp 183 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 181 --lp 185 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 182 --lp 186 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 183 --lp 185 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 183 --lp 187 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 185 --lp 187 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 185 --lp 189 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 186 --lp 188 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 186 --lp 190 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 187 --lp 189 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 187 --lp 191 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 188 --lp 190 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 188 --lp 192 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 189 --lp 191 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 189 --lp 193 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 190 --lp 192 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 190 --lp 194 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 191 --lp 193 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 191 --lp 195 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 192 --lp 194 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 192 --lp 196 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 193 --lp 195 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 193 --lp 197 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 194 --lp 196 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 194 --lp 198 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 195 --lp 197 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 195 --lp 199 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 196 --lp 198 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 196 --lp 200 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 197 --lp 199 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 197 --lp 201 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 198 --lp 200 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 198 --lp 202 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 199 --lp 201 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 199 --lp 203 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 200 --lp 202 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 200 --lp 204 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 201 --lp 203 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 201 --lp 205 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 202 --lp 204 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 202 --lp 206 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 203 --lp 205 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 203 --lp 207 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 204 --lp 206 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 204 --lp 208 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 205 --lp 207 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 205 --lp 209 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 206 --lp 208 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 206 --lp 210 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 207 --lp 209 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 207 --lp 211 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 208 --lp 210 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 208 --lp 212 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 209 --lp 211 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 209 --lp 213 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 210 --lp 212 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 210 --lp 214 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 211 --lp 213 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 211 --lp 215 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 212 --lp 214 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 212 --lp 216 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 213 --lp 215 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 213 --lp 217 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 214 --lp 216 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 214 --lp 218 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 215 --lp 217 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 215 --lp 219 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 216 --lp 218 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 216 --lp 220 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 217 --lp 219 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 217 --lp 221 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 218 --lp 220 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 218 --lp 222 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 219 --lp 221 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 219 --lp 223 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 220 --lp 222 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 220 --lp 224 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 221 --lp 223 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 221 --lp 225 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 222 --lp 224 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 222 --lp 226 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 223 --lp 225 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 223 --lp 227 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 224 --lp 226 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 224 --lp 228 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 225 --lp 227 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 225 --lp 229 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 226 --lp 228 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 226 --lp 230 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 227 --lp 229 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 227 --lp 231 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 228 --lp 230 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 228 --lp 232 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 229 --lp 231 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 229 --lp 233 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 230 --lp 232 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 230 --lp 234 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 231 --lp 233 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 231 --lp 235 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 232 --lp 234 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 232 --lp 236 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 233 --lp 235 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 233 --lp 237 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 234 --lp 236 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 234 --lp 238 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 235 --lp 237 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 235 --lp 239 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 236 --lp 238 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 236 --lp 240 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 237 --lp 239 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 237 --lp 241 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 238 --lp 240 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 238 --lp 242 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 239 --lp 241 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 239 --lp 243 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 240 --lp 242 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 240 --lp 244 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 241 --lp 243 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 241 --lp 245 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 242 --lp 244 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 242 --lp 246 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 243 --lp 245 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 243 --lp 247 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 244 --lp 246 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 244 --lp 248 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 245 --lp 247 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 245 --lp 249 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 246 --lp 248 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 246 --lp 250 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 247 --lp 249 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 247 --lp 251 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 248 --lp 250 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 248 --lp 252 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 249 --lp 251 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 249 --lp 253 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 250 --lp 252 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 250 --lp 254 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 251 --lp 253 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 251 --lp 255 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 252 --lp 254 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 252 --lp 256 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 253 --lp 255 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 253 --lp 257 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 254 --lp 256 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 254 --lp 258 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 255 --lp 257 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 255 --lp 259 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 256 --lp 258 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 256 --lp 260 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 257 --lp 259 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 257 --lp 261 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 258 --lp 260 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 258 --lp 262 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 259 --lp 261 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 259 --lp 263 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 260 --lp 262 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 260 --lp 264 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 261 --lp 263 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 261 --lp 265 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 262 --lp 264 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 262 --lp 266 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 263 --lp 265 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 263 --lp 267 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 264 --lp 266 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 264 --lp 268 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 265 --lp 267 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 265 --lp 269 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 266 --lp 268 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 266 --lp 270 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 267 --lp 269 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 267 --lp 271 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 268 --lp 270 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 268 --lp 272 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 269 --lp 271 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 269 --lp 273 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 270 --lp 272 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 270 --lp 274 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 271 --lp 273 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 271 --lp 275 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 272 --lp 274 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 272 --lp 276 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 273 --lp 275 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 273 --lp 277 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 274 --lp 276 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 274 --lp 278 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 275 --lp 277 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 275 --lp 279 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 276 --lp 278 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 276 --lp 280 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 277 --lp 279 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 277 --lp 281 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 278 --lp 280 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 278 --lp 282 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 279 --lp 281 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 279 --lp 283 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 280 --lp 282 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 280 --lp 284 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 281 --lp 283 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 281 --lp 285 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 282 --lp 284 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 282 --lp 286 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 283 --lp 285 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 283 --lp 287 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 284 --lp 286 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 284 --lp 288 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 285 --lp 287 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 285 --lp 289 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 286 --lp 288 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 286 --lp 290 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 287 --lp 289 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 287 --lp 291 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 288 --lp 290 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 288 --lp 292 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 289 --lp 291 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 289 --lp 293 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 290 --lp 292 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 290 --lp 294 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 291 --lp 293 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 291 --lp 295 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 292 --lp 294 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 292 --lp 296 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 293 --lp 295 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 293 --lp 297 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 294 --lp 296 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 294 --lp 298 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 295 --lp 297 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 295 --lp 299 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 296 --lp 298 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 296 --lp 300 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 297 --lp 299 --n 0 --np 0 --t 0 --find_baselines
-python /home/g.samarth/globalHelioseismology/cs_data.py --l 298 --lp 300 --n 0 --np 0 --t 0 --find_baselines
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 144 --l2 146 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 157 --l2 159 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 157 --l2 161 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 158 --l2 160 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 158 --l2 162 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 159 --l2 161 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 159 --l2 163 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 160 --l2 162 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 160 --l2 164 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 161 --l2 163 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 162 --l2 164 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 162 --l2 166 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 163 --l2 167 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 164 --l2 166 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 164 --l2 168 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 166 --l2 168 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 166 --l2 170 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 167 --l2 169 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 167 --l2 171 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 168 --l2 170 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 168 --l2 172 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 169 --l2 171 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 169 --l2 173 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 170 --l2 172 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 170 --l2 174 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 171 --l2 173 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 171 --l2 175 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 172 --l2 174 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 172 --l2 176 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 173 --l2 175 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 173 --l2 177 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 174 --l2 176 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 174 --l2 178 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 175 --l2 177 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 175 --l2 179 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 176 --l2 178 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 176 --l2 180 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 177 --l2 179 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 177 --l2 181 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 178 --l2 180 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 178 --l2 182 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 179 --l2 181 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 179 --l2 183 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 180 --l2 182 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 181 --l2 183 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 181 --l2 185 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 182 --l2 186 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 183 --l2 185 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 183 --l2 187 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 185 --l2 187 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 185 --l2 189 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 186 --l2 188 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 186 --l2 190 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 187 --l2 189 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 187 --l2 191 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 188 --l2 190 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 188 --l2 192 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 189 --l2 191 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 189 --l2 193 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 190 --l2 192 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 190 --l2 194 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 191 --l2 193 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 191 --l2 195 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 192 --l2 194 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 192 --l2 196 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 193 --l2 195 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 193 --l2 197 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 194 --l2 196 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 194 --l2 198 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 195 --l2 197 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 195 --l2 199 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 196 --l2 198 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 196 --l2 200 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 197 --l2 199 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 197 --l2 201 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 198 --l2 200 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 198 --l2 202 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 199 --l2 201 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 199 --l2 203 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 200 --l2 202 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 200 --l2 204 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 201 --l2 203 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 201 --l2 205 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 202 --l2 204 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 202 --l2 206 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 203 --l2 205 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 203 --l2 207 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 204 --l2 206 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 204 --l2 208 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 205 --l2 207 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 205 --l2 209 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 206 --l2 208 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 206 --l2 210 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 207 --l2 209 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 207 --l2 211 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 208 --l2 210 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 208 --l2 212 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 209 --l2 211 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 209 --l2 213 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 210 --l2 212 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 210 --l2 214 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 211 --l2 213 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 211 --l2 215 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 212 --l2 214 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 212 --l2 216 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 213 --l2 215 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 213 --l2 217 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 214 --l2 216 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 214 --l2 218 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 215 --l2 217 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 215 --l2 219 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 216 --l2 218 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 216 --l2 220 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 217 --l2 219 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 217 --l2 221 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 218 --l2 220 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 218 --l2 222 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 219 --l2 221 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 219 --l2 223 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 220 --l2 222 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 220 --l2 224 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 221 --l2 223 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 221 --l2 225 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 222 --l2 224 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 222 --l2 226 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 223 --l2 225 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 223 --l2 227 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 224 --l2 226 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 224 --l2 228 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 225 --l2 227 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 225 --l2 229 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 226 --l2 228 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 226 --l2 230 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 227 --l2 229 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 227 --l2 231 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 228 --l2 230 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 228 --l2 232 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 229 --l2 231 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 229 --l2 233 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 230 --l2 232 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 230 --l2 234 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 231 --l2 233 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 231 --l2 235 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 232 --l2 234 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 232 --l2 236 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 233 --l2 235 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 233 --l2 237 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 234 --l2 236 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 234 --l2 238 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 235 --l2 237 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 235 --l2 239 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 236 --l2 238 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 236 --l2 240 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 237 --l2 239 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 237 --l2 241 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 238 --l2 240 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 238 --l2 242 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 239 --l2 241 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 239 --l2 243 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 240 --l2 242 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 240 --l2 244 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 241 --l2 243 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 241 --l2 245 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 242 --l2 244 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 242 --l2 246 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 243 --l2 245 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 243 --l2 247 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 244 --l2 246 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 244 --l2 248 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 245 --l2 247 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 245 --l2 249 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 246 --l2 248 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 246 --l2 250 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 247 --l2 249 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 247 --l2 251 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 248 --l2 250 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 248 --l2 252 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 249 --l2 251 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 249 --l2 253 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 250 --l2 252 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 250 --l2 254 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 251 --l2 253 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 251 --l2 255 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 252 --l2 254 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 252 --l2 256 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 253 --l2 255 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 253 --l2 257 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 254 --l2 256 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 254 --l2 258 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 255 --l2 257 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 255 --l2 259 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 256 --l2 258 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 256 --l2 260 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 257 --l2 259 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 257 --l2 261 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 258 --l2 260 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 258 --l2 262 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 259 --l2 261 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 259 --l2 263 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 260 --l2 262 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 260 --l2 264 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 261 --l2 263 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 261 --l2 265 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 262 --l2 264 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 262 --l2 266 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 263 --l2 265 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 263 --l2 267 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 264 --l2 266 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 264 --l2 268 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 265 --l2 267 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 265 --l2 269 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 266 --l2 268 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 266 --l2 270 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 267 --l2 269 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 267 --l2 271 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 268 --l2 270 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 268 --l2 272 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 269 --l2 271 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 269 --l2 273 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 270 --l2 272 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 270 --l2 274 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 271 --l2 273 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 271 --l2 275 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 272 --l2 274 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 272 --l2 276 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 273 --l2 275 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 273 --l2 277 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 274 --l2 276 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 274 --l2 278 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 275 --l2 277 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 275 --l2 279 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 276 --l2 278 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 276 --l2 280 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 277 --l2 279 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 277 --l2 281 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 278 --l2 280 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 278 --l2 282 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 279 --l2 281 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 279 --l2 283 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 280 --l2 282 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 280 --l2 284 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 281 --l2 283 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 281 --l2 285 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 282 --l2 284 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 282 --l2 286 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 283 --l2 285 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 283 --l2 287 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 284 --l2 286 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 284 --l2 288 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 285 --l2 287 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 285 --l2 289 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 286 --l2 288 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 286 --l2 290 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 287 --l2 289 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 287 --l2 291 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 288 --l2 290 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 288 --l2 292 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 289 --l2 291 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 289 --l2 293 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 290 --l2 292 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 290 --l2 294 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 291 --l2 293 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 291 --l2 295 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 292 --l2 294 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 292 --l2 296 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 293 --l2 295 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 293 --l2 297 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 294 --l2 296 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 294 --l2 298 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 295 --l2 297 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 295 --l2 299 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 296 --l2 298 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 296 --l2 300 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 297 --l2 299 --n1 0 --n2 0 --t 8
+/home/g.samarth/.conda/envs/helio/bin/python /home/g.samarth/globalHelioseismology/cs_data.py --l1 298 --l2 300 --n1 0 --n2 0 --t 8

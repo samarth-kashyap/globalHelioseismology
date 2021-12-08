@@ -319,9 +319,7 @@ class crossSpectra():
         self.mode_data = np.loadtxt("/home/g.samarth/globalHelioseismology/" +
                                     f"mode-params/hmi.6328.36")
         self.dirname = f"/scratch/g.samarth/globalHelioseismology"
-        self.fname_suffix = f"{n1:02d}.{l1:03d}-{n2:02d}.{l2:03d}"
-        if abs(self.t) > 0:
-            self.fname_suffix += f"_{self.t:03d}"
+        self.fname_suffix = f"{n1:02d}.{l1:03d}-{n2:02d}.{l2:03d}-{self.t:03d}"
 
         if plot_data:
             if not os.path.isdir(f"{self.dirname}/plots/csplot_{self.n1:02d}"):
@@ -330,7 +328,8 @@ class crossSpectra():
             self.fig = fig
             self.axs = axs.flatten()
             self.fig.suptitle(f"Spectra for $(n_1, \ell_1)$ = ({self.n1}, {self.l1})" +
-                              f" and $(n_2, \ell_2)$ = ({self.n2}, {self.l2})")
+                              f" and $(n_2, \ell_2)$ = ({self.n2}, {self.l2})" +
+                              f" - t = {self.t}")
             self.axs[0].set_title("Real spectra, $m >= 0$")
             self.axs[1].set_title("Real spectra, $m <= 0$")
             self.axs[2].set_title("Imag spectra, $m >= 0$")
@@ -345,7 +344,8 @@ class crossSpectra():
             self.fig_snr = fig_snr
             self.axs_snr = axs_snr.flatten()
             self.fig_snr.suptitle(f"S/N ratio $(n_1, \ell_1)$ = ({self.n1}, {self.l1})" +
-                                  f" and $(n_2, \ell_2)$ = ({self.n2}, {self.l2})")
+                                  f" and $(n_2, \ell_2)$ = ({self.n2}, {self.l2})" +
+                                  f" - t = {self.t}")
             self.axs_snr[0].set_title("Real spectra, $m >= 0$")
             self.axs_snr[1].set_title("Real spectra, $m <= 0$")
             self.axs_snr[2].set_title("Imag spectra, $m >= 0$")
@@ -395,15 +395,16 @@ class crossSpectra():
         l1, l2 = self.l1, self.l2
         n1, n2 = self.n1, self.n2
 
-        bsl_p, bsl_n = self.find_baseline_coeffs(csp, csn)
+        bslp_coeff, bsln_coeff = self.find_baseline_coeffs(csp, csn)
         bslp_spec = np.zeros((1, 4), dtype=np.complex128)
         bsln_spec = np.zeros((1, 4), dtype=np.complex128)
         bslp_spec[0, :2] = np.array([self.l1, self.l2])
         bsln_spec[0, :2] = np.array([self.l1, self.l2])
-        bslp_spec[0, 2:] = bsl_p
-        bsln_spec[0, 2:] = bsl_n
+        bslp_spec[0, 2:] = bslp_coeff
+        bsln_spec[0, 2:] = bsln_coeff
+        _bslp, _bsln = self.get_baseline_from_coeffs(bslp_coeff, bsln_coeff)
 
-        snr_p, snr_r = self.compute_snr((csp_summ, csn_summ),
+        snr_p, snr_r = self.compute_snr((csp_summ - _bslp, csn_summ - _bsln),
                                         (variance_p, variance_n))
 
         if self.plot_data:
@@ -431,7 +432,6 @@ class crossSpectra():
                                      color='g', alpha=0.9)
             self.axs[3].plot(self.freq_n[0], csn_summ.imag, 'r', linewidth=0.7)
 
-            _bslp, _bsln = self.get_baseline_from_coeffs(bsl_p, bsl_n)
             self.axs[0].plot(self.freq_p[0], _bslp.real, '--y')
             self.axs[1].plot(self.freq_n[0], _bsln.real, '--y')
             self.axs[2].plot(self.freq_p[0], _bslp.imag, '--y')
@@ -441,22 +441,22 @@ class crossSpectra():
             os.mkdir(f"{self.dirname}/csdata_{self.n1:02d}")
 
         self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                       f"csp_data_{self.fname_suffix}.npy", csp)
+                       f"csp_data_{self.fname_suffix}.npy", csp_summ)
         self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                       f"csm_data_{self.fname_suffix}.npy", csn)
+                       f"csm_data_{self.fname_suffix}.npy", csn_summ)
         self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
                        f"variance_p_{self.fname_suffix}.npy", variance_p)
         self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
                        f"variance_n_{self.fname_suffix}.npy", variance_n)
         self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                       f"bsl_p_{self.fname_suffix}.npy", bslp_spec)
+                       f"bsl_p_{self.fname_suffix}.npy", _bslp) #bslp_spec)
         self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                       f"bsl_n_{self.fname_suffix}.npy", bsln_spec)
+                       f"bsl_n_{self.fname_suffix}.npy", _bsln) #bsln_spec)
         self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                       f"snrp_{self.fname_suffix}.npy", bsln_spec)
+                       f"snrp_{self.fname_suffix}.npy", snr_p)
         self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
-                       f"snrn_{self.fname_suffix}.npy", bsln_spec)
-        return csp_summ, csn_summ, variance_p, variance_n, bsl_p, bsl_n
+                       f"snrn_{self.fname_suffix}.npy", snr_r)
+        return csp_summ, csn_summ, variance_p, variance_n, bslp_coeff, bsln_coeff
     # }}} store_cross_spectra(self)
 
     def compute_snr(self, cspn, varpn, snr_thresh=0.5):
@@ -474,10 +474,14 @@ class crossSpectra():
         snr_n1 = abs(csn.real)**2/varn.real
         snr_n2 = abs(csn.imag)**2/varn.imag
 
-        mask_p1 = mask_small(abs(csp.real)**2)
-        mask_p2 = mask_small(abs(csp.imag)**2)
-        mask_n1 = mask_small(abs(csn.real)**2)
-        mask_n2 = mask_small(abs(csn.imag)**2)
+        mask_p1 = mask_small(csp.real,
+                             threshold=np.mean(np.sqrt(varp.real))/abs(csp.real).max())
+        mask_p2 = mask_small(csp.imag,
+                             threshold=np.mean(np.sqrt(varp.imag))/abs(csp.imag).max())
+        mask_n1 = mask_small(csn.real,
+                             threshold=np.mean(np.sqrt(varn.real))/abs(csn.real).max())
+        mask_n2 = mask_small(csn.imag,
+                             threshold=np.mean(np.sqrt(varn.imag))/abs(csn.imag).max())
 
         snr_p1[~mask_p1] = 0
         snr_p2[~mask_p2] = 0
@@ -491,16 +495,28 @@ class crossSpectra():
 
         snr_p = snr_p1 + 1j*snr_p2
         snr_n = snr_n1 + 1j*snr_n2
+        snr_lim = 3
 
         if self.plot_snr:
-            self.axs_snr[0].plot(self.freq_p[0], snr_p.real, 'xk', linewidth=0.7)
+            count = (snr_p.real > snr_lim).sum()
+            self.axs_snr[0].semilogy(self.freq_p[0], snr_p.real, 'xk', linewidth=0.7)
             self.axs_snr[0].set_xlim([self.freq_p[0][0], self.freq_p[0][-1]])
-            self.axs_snr[1].plot(self.freq_n[0], snr_n.real, 'xk', linewidth=0.7)
+            self.axs_snr[0].set_title(f'Real spectra, m > 0: SNR>{snr_lim} count = {count}')
+
+            count = (snr_n.real > snr_lim).sum()
+            self.axs_snr[1].semilogy(self.freq_n[0], snr_n.real, 'xk', linewidth=0.7)
             self.axs_snr[1].set_xlim([self.freq_n[0][0], self.freq_n[0][-1]])
-            self.axs_snr[2].plot(self.freq_p[0], snr_p.imag, 'xk', linewidth=0.7)
+            self.axs_snr[1].set_title(f'Real spectra, m < 0: SNR>{snr_lim} count = {count}')
+
+            count = (snr_p.imag > snr_lim).sum()
+            self.axs_snr[2].semilogy(self.freq_p[0], snr_p.imag, 'xk', linewidth=0.7)
             self.axs_snr[2].set_xlim([self.freq_p[0][0], self.freq_p[0][-1]])
-            self.axs_snr[3].plot(self.freq_n[0], snr_n.imag, 'xk', linewidth=0.7)
+            self.axs_snr[2].set_title(f'Imag spectra, m > 0: SNR>{snr_lim} count = {count}')
+
+            count = (snr_n.imag > snr_lim).sum()
+            self.axs_snr[3].semilogy(self.freq_n[0], snr_n.imag, 'xk', linewidth=0.7)
             self.axs_snr[3].set_xlim([self.freq_n[0][0], self.freq_n[0][-1]])
+            self.axs_snr[3].set_title(f'Imag spectra, m < 0: SNR>{snr_lim} count = {count}')
 
         return snr_p, snr_n
 
