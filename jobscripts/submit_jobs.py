@@ -14,7 +14,7 @@ with open(fname, "w") as f:
 #PBS -N cs.n{args.nmin}.{args.nmax}.t{args.t}.data
 #PBS -o csout.n{args.nmin}.{args.nmax}.t{args.t}.log
 #PBS -e cserr.n{args.nmin}.{args.nmax}.t{args.t}.log
-#PBS -l select=1:ncpus=2:mem=4gb
+#PBS -l select=1:ncpus=16:mem=32gb
 #PBS -l walltime=12:30:00
 #PBS -q large
 echo \"Starting at \"`date`
@@ -22,6 +22,6 @@ cd $PBS_O_WORKDIR
 cd ..
 export PATH=$PATH:/home/apps/GnuParallel/bin
 cd $PBS_WORKDIR
-parallel --jobs 2 < $PBS_O_WORKDIR/ipjobs_cs_n{args.nmin}-{args.nmax}.t{args.t:02d}.sh
+parallel --jobs 16 < $PBS_O_WORKDIR/ipjobs_cs_n{args.nmin}-{args.nmax}.t{args.t:02d}.sh
 echo \"Finished at \"`date`""")
 os.system(f"qsub {fname}")

@@ -300,7 +300,7 @@ class crossSpectra():
                    "plot_scatter"]
 
     def __init__(self, n1, l1, n2, l2, t=0, instrument="HMI", smooth=False,
-                 daynum=1, dayavgnum=5, fit_bsl=False, store_spectra=True,
+                 daynum=1, dayavgnum=15, fit_bsl=False, store_spectra=True,
                  plot_data=True, plot_snr=True):
         # swapping values of ell if l2 < l1
         if l2 < l1:
@@ -483,15 +483,20 @@ class crossSpectra():
         mask_n2 = mask_small(csn.imag,
                              threshold=np.mean(np.sqrt(varn.imag))/abs(csn.imag).max())
 
-        snr_p1[~mask_p1] = 0
-        snr_p2[~mask_p2] = 0
-        snr_n1[~mask_n1] = 0
-        snr_n2[~mask_n2] = 0
+        # snr_p1[~mask_p1] = 0
+        # snr_p2[~mask_p2] = 0
+        # snr_n1[~mask_n1] = 0
+        # snr_n2[~mask_n2] = 0
 
-        snr_p1[snr_p1 < snr_thresh] = np.nan
-        snr_n1[snr_n1 < snr_thresh] = np.nan
-        snr_p2[snr_p2 < snr_thresh] = np.nan
-        snr_n2[snr_n2 < snr_thresh] = np.nan
+        # snr_p1[snr_p1 < snr_thresh] = np.nan
+        # snr_n1[snr_n1 < snr_thresh] = np.nan
+        # snr_p2[snr_p2 < snr_thresh] = np.nan
+        # snr_n2[snr_n2 < snr_thresh] = np.nan
+
+        mask_p1 = mask_p1 * snr_p1 > snr_thresh
+        mask_p2 = mask_p2 * snr_p2 > snr_thresh
+        mask_n1 = mask_n1 * snr_n1 > snr_thresh
+        mask_n2 = mask_n2 * snr_n2 > snr_thresh
 
         snr_p = snr_p1 + 1j*snr_p2
         snr_n = snr_n1 + 1j*snr_n2
@@ -499,24 +504,36 @@ class crossSpectra():
 
         if self.plot_snr:
             count = (snr_p.real > snr_lim).sum()
-            self.axs_snr[0].semilogy(self.freq_p[0], snr_p.real, 'xk', linewidth=0.7)
+            self.axs_snr[0].plot(self.freq_p[0], snr_p.real, '.c', markersize=3)
+            self.axs_snr[0].semilogy(self.freq_p[0][mask_p1],
+                                     snr_p.real[mask_p1], '+k', markersize=5)
             self.axs_snr[0].set_xlim([self.freq_p[0][0], self.freq_p[0][-1]])
-            self.axs_snr[0].set_title(f'Real spectra, m > 0: SNR>{snr_lim} count = {count}')
+            self.axs_snr[0].set_title(f'Real spectra, m > 0:' +
+                                      f'SNR>{snr_lim} count = {count}')
 
             count = (snr_n.real > snr_lim).sum()
-            self.axs_snr[1].semilogy(self.freq_n[0], snr_n.real, 'xk', linewidth=0.7)
+            self.axs_snr[1].semilogy(self.freq_n[0], snr_n.real, '.c', markersize=3)
+            self.axs_snr[1].semilogy(self.freq_n[0][mask_n1],
+                                     snr_n.real[mask_n1], '+k', markersize=5)
             self.axs_snr[1].set_xlim([self.freq_n[0][0], self.freq_n[0][-1]])
-            self.axs_snr[1].set_title(f'Real spectra, m < 0: SNR>{snr_lim} count = {count}')
+            self.axs_snr[1].set_title(f'Real spectra, m < 0:' +
+                                      f'SNR>{snr_lim} count = {count}')
 
             count = (snr_p.imag > snr_lim).sum()
-            self.axs_snr[2].semilogy(self.freq_p[0], snr_p.imag, 'xk', linewidth=0.7)
+            self.axs_snr[2].semilogy(self.freq_p[0], snr_p.imag, '.c', markersize=3)
+            self.axs_snr[2].semilogy(self.freq_p[0][mask_p2],
+                                     snr_p.imag[mask_p2], '+k', markersize=5)
             self.axs_snr[2].set_xlim([self.freq_p[0][0], self.freq_p[0][-1]])
-            self.axs_snr[2].set_title(f'Imag spectra, m > 0: SNR>{snr_lim} count = {count}')
+            self.axs_snr[2].set_title(f'Imag spectra, m > 0:' +
+                                      f'SNR>{snr_lim} count = {count}')
 
             count = (snr_n.imag > snr_lim).sum()
-            self.axs_snr[3].semilogy(self.freq_n[0], snr_n.imag, 'xk', linewidth=0.7)
+            self.axs_snr[3].semilogy(self.freq_n[0], snr_n.imag, '.c', markersize=3)
+            self.axs_snr[3].semilogy(self.freq_n[0][mask_n2],
+                                     snr_n.imag[mask_n2], '+k', markersize=5)
             self.axs_snr[3].set_xlim([self.freq_n[0][0], self.freq_n[0][-1]])
-            self.axs_snr[3].set_title(f'Imag spectra, m < 0: SNR>{snr_lim} count = {count}')
+            self.axs_snr[3].set_title(f'Imag spectra, m < 0:' +
+                                      f'SNR>{snr_lim} count = {count}')
 
         return snr_p, snr_n
 
