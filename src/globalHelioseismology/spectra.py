@@ -300,7 +300,7 @@ class crossSpectra():
                    "plot_scatter"]
 
     def __init__(self, n1, l1, n2, l2, t=0, instrument="HMI", smooth=False,
-                 daynum=1, dayavgnum=15, fit_bsl=False, store_spectra=True,
+                 daynum=1, dayavgnum=5, fit_bsl=False, store_spectra=True,
                  plot_data=True, plot_snr=True):
         # swapping values of ell if l2 < l1
         if l2 < l1:
