@@ -456,6 +456,10 @@ class crossSpectra():
                        f"snrp_{self.fname_suffix}.npy", snr_p)
         self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
                        f"snrn_{self.fname_suffix}.npy", snr_r)
+        self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                       f"freqp_{self.fname_suffix}.npy", self.freq_p[0])
+        self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
+                       f"freqn_{self.fname_suffix}.npy", self.freq_n[0])
         return csp_summ, csn_summ, variance_p, variance_n, bslp_coeff, bsln_coeff
     # }}} store_cross_spectra(self)
 
