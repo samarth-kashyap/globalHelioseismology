@@ -14,7 +14,8 @@ with open(f"{package_dir}/.config", "r") as f:
 
 __all__ = ["observedData",
            "frequencyBins",
-           "crossSpectra"]
+           "crossSpectra",
+           "crossSpectraFull"]
 
 
 class observedData():
@@ -844,3 +845,144 @@ class crossSpectra():
                          markersize=0.8, linewidth=0.8, alpha=0.6)
         return None
     # }}} plot_scatter(self, cs, pm)
+
+
+class crossSpectraFull():
+    """Class to compute helioseismic cross-spectra.
+    The cross-spectra are presented as 2D-images; (m, omega) are the two dimensions
+    of the image.
+    """
+    def __init__(self,
+                 n1,
+                 l1,
+                 n2,
+                 l2,
+                 t=0,
+                 instrument="hmi",
+                 smooth=False,
+                 daynum=1,
+                 dayavgnum=5,
+                 summ=False,
+                 derot=False)
+        # swapping values of ell if l2 < l1
+        if l2 < l1:
+            ltemp, ntemp = l2, n2
+            l2, n2 = l1, n1
+            l1, n1 = ltemp, ntemp
+
+        self.delta_ell = abs(l2 - l1)
+        self.n1, self.n2 = int(n1), int(n2)
+        self.l1, self.l2 = int(l1), int(l2)
+        self.t, self.dayavgnum = int(t), int(dayavgnum)
+        if instrument=='hmi': self.daystart = 6328
+        self.mode_data = np.loadtxt(f"{DIRS.mode_dir}/hmi.6328.36")
+        self.dirname = DIRS.output_dir
+        self.fname_suffix = f"{n1:02d}.{l1:03d}-{n2:02d}.{l2:03d}-{self.t:03d}"
+        self.summ = summ
+        self.derot = derot
+
+        # observed data relevant to the class instance
+        self.od = observedData(instrument)
+
+        # loading frequency bins relevant to the class instance
+        self.fb = frequencyBins(n1, l1, n2, l2, instrument=instrument)
+        freq, idx_np, idx_diff_np, idx_derot_diff_np = self.fb.window_freq()
+
+        self.freq, (self.idx_n, self.idx_p) = freq, idx_np
+        self.idx_diff_n, self.idx_diff_p = idx_diff_np
+        self.idx_derot_diff_n, self.idx_derot_diff_p = idx_derot_diff_np
+
+
+    # {{{ def compute_cross_spectra(self, plot=False):
+    def get_cross_spectra(self, daynum=6328):
+        afft1p, afft1n = self.od.load_time_series(self.l1, day=daynum)
+        (afft2p, afft2n) = (self.od.load_time_series(self.l2, day=daynum)) if \
+            self.delta_ell != 0 else (afft1p*1.0, afft1n*1.0)
+
+        # windowing in frequency and restricting to m-values to be
+        # min(l1, l2)
+        afft1p = afft1p[:, self.idx_n:self.idx_p]
+        afft1n = afft1n[:, self.idx_n:self.idx_p]
+        afft2p = afft2p[:(self.l1+1), self.idx_n:self.idx_p]
+        afft2n = afft2n[:(self.l1+1), self.idx_n:self.idx_p]
+
+        # shifting the \phi2 by t
+        if self.t != 0:
+            afft2p = np.roll(afft2p[:, :], self.t, axis=0)
+            afft2n = np.roll(afft2n[:, :], self.t, axis=0)
+
+        # computing the cross-spectrum
+        _csp = afft1p.conjugate()*afft2p[:, :]
+        _csn = afft1n.conjugate()*afft2n[:, :]
+
+        if self.derot:
+            csp, freq_p = self.derotate(csp, 1)
+            csn, freq_n = self.derotate(csn, -1)
+
+        self.freq_p = freq_p
+        self.freq_n = freq_n
+
+        return csp, csn
+    # }}} compute_cross_spectra(self, plot=False):
+
+
+    # {{{ def derotate(phi, sgn):
+    def derotate(self, phi, sgn):
+        """Derotate the given cross-spectra
+        Inputs:
+        -------
+        phi - np.ndarray(ndim=2)
+            frequency series.
+        sgn - int
+            sgn = +1 for m >= 0
+            sgn = -1 for m  < 0
+
+        Outputs:
+        --------
+        phinew - np.ndarray(ndim=2)
+            derotated cross spectra
+        freq_win - np.ndarray(ndim=2)
+            derotated frequency array for every m
+        """
+        # renaming parameters
+        l, n = self.l1, self.n1
+        freq = self.freq
+        data = self.mode_data
+        freq_len = self.idx_derot_diff_p + self.idx_derot_diff_n + 1
+
+        phi_derotated = np.zeros((l+1, freq_len), dtype=np.complex128)
+        freq_win = np.zeros((l+1, freq_len))
+
+        cen_freq, __, __ = self.od.find_freq(l, n, 0)
+        m_arr = np.arange(0, sgn*(l+1), sgn)
+        for m in m_arr:
+            _nu_nlm = cen_freq + self.finda1(n, l, m) * 1e-3
+            _nu_nlm_idx = np.argmin(np.abs(freq - _nu_nlm))
+            _idx_min = _nu_nlm_idx - self.idx_derot_diff_n
+            _idx_max = _nu_nlm_idx + self.idx_derot_diff_p + 1
+            try:
+                freq_win[abs(m), :] = freq[_idx_min:_idx_max]
+            except ValueError:
+                print(f"l = {l}, m = {m}, _nu_nlm_idx = {_nu_nlm_idx}; " +
+                      f"_idx_min = {_idx_min}; _idx_max = {_idx_max}")
+            _real = phi[abs(m), _idx_min-1:_idx_max-1].real
+            _imag = phi[abs(m), _idx_min-1:_idx_max-1].imag
+            phi_derotated[abs(m), :] = _real + 1j*_imag
+        return phi_derotated, freq_win
+    # }}} derotate(phi, l, n, freq, winhalflen, sgn)
+
+    # {{{ def finda1(data, n, l, m):
+    def finda1(self, n, l, m):
+        """Find a coefficients for given l, n, m
+        """
+        L = sqrt(l*(l+1))
+        data = self.mode_data
+        try:
+            mode_idx = np.where((data[:, 0] == l) * (data[:, 1] == n))[0][0]
+        except IndexError:
+            print(f"MODE NOT FOUND : l = {l}, n = {n}")
+            return None, None, None
+        splits = np.append([0.0], data[mode_idx, 12:48])
+        totsplit = legval(1.0*m/L, splits)*L
+        return totsplit - 31.7*m
+    # }}} finda1(data, n, l, m)
