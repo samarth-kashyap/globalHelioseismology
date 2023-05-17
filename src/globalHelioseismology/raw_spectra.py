@@ -43,7 +43,7 @@ class crossSpectra():
         self.t = int(t)
         self.mode_data = np.loadtxt(f"{DIRS.mode_dir}/hmi.6328.36")
         self.dirname = DIRS.output_dir
-        self.fname_suffix = f"{n1:02d}.{l1:03d}-{n2:02d}.{l2:03d}-{self.t:03d}"
+        self.fname_suffix = f"{daynum:04d}-{n1:02d}.{l1:03d}-{n2:02d}.{l2:03d}-{self.t:03d}"
 
         # observed data relevant to the class instance
         self.od = observedData(instrument)
