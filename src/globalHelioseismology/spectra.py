@@ -7,6 +7,8 @@ import numpy as np
 import time
 import os
 
+from ..globalvars import dirConfig
+
 current_dir = os.path.dirname(os.path.realpath(__file__))
 package_dir = os.path.dirname(os.path.dirname(current_dir))
 with open(f"{package_dir}/.config", "r") as f:
@@ -17,6 +19,7 @@ __all__ = ["observedData",
            "crossSpectra",
            "crossSpectraFull"]
 
+DIRS = dirConfig()
 
 class observedData():
     __all__ = ["find_freq",
@@ -39,9 +42,9 @@ class observedData():
     def __init__(self, instrument="HMI"):
         self.instrument = instrument
 
-        if instrument == "HMI":
-            self.data = np.loadtxt(f"{package_dir}/mode-params/hmi.6328.36")
-            self.ts_datadir = data_dir
+        #if instrument == "HMI":
+        self.data = np.loadtxt(f"{DIRS.mode_dir}/hmi.6328.36")
+        self.ts_datadir = DIRS.data_dir
 
     # {{{ def find_freq(self, l, n, m):
     def find_freq(self, l, n, m):
@@ -145,8 +148,8 @@ class frequencyBins():
         self.instrument = instrument
         self.freq_bins_global = None
         self.get_freq_bins(1)
-        if instrument == "HMI":
-            self.mode_data = np.loadtxt(f"{package_dir}/mode-params/hmi.6328.36")
+        # if instrument == "HMI":
+        self.mode_data = np.loadtxt(f"{DIRS.mode_dir}/hmi.6328.36")
         self.od = observedData(self.instrument)
 
     # {{{ def get_freq_bins(self, num_ts_blocks=1)
@@ -309,6 +312,8 @@ class crossSpectra():
             l2, n2 = l1, n1
             l1, n1 = ltemp, ntemp
 
+        seismo_home = "/scratch/seismogroup/samarth/home-sgk"
+        seismo_scratch = "/scratch/seismogroup/samarth/scratch-sgk"
         self.plot_data = plot_data
         self.plot_snr = plot_snr
 
@@ -317,9 +322,9 @@ class crossSpectra():
         self.n1, self.n2 = int(n1), int(n2)
         self.l1, self.l2 = int(l1), int(l2)
         self.t, self.dayavgnum = int(t), int(dayavgnum)
-        self.mode_data = np.loadtxt("/home/g.samarth/globalHelioseismology/" +
+        self.mode_data = np.loadtxt(f"{seismo_home}/globalHelioseismology/" +
                                     f"mode-params/hmi.6328.36")
-        self.dirname = f"/scratch/g.samarth/globalHelioseismology"
+        self.dirname = f"{seismo_scratch}/globalHelioseismology"
         self.fname_suffix = f"{n1:02d}.{l1:03d}-{n2:02d}.{l2:03d}-{self.t:03d}"
 
         if plot_data:
@@ -863,7 +868,7 @@ class crossSpectraFull():
                  daynum=1,
                  dayavgnum=5,
                  summ=False,
-                 derot=False)
+                 derot=False):
         # swapping values of ell if l2 < l1
         if l2 < l1:
             ltemp, ntemp = l2, n2

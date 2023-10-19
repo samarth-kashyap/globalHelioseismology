@@ -7,4 +7,6 @@ src/globalHelioseismology.egg-info/
 pip-wheel-metadata
 .config
 *.sh
+data
+interactivejob.sh
 

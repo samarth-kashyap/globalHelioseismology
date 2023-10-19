@@ -1,6 +1,5 @@
 # File: src/globalHelioseismology/__init__.py
-__all__ = ["spectra", "global_vars"]
+__all__ = ["raw_spectra", "global_vars"]
 
-from . import spectra
-from . import global_vars
+from . import raw_spectra
 

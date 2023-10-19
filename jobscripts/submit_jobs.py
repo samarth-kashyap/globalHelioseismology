@@ -3,8 +3,8 @@ import argparse
 import os
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--nmin", help='radial order', type=int)
-parser.add_argument("--nmax", help='radial order', type=int)
+parser.add_argument("--nmin", help='radial order', type=int, default=0)
+parser.add_argument("--nmax", help='radial order', type=int, default=25)
 parser.add_argument("--t", help='radial order', type=int, default=0)
 args = parser.parse_args()
 

@@ -30,7 +30,7 @@ class crossSpectra():
                  l2=200,
                  t=0,
                  instrument="hmi",
-                 daynum=6328)
+                 daynum=6328):
         # swapping values of ell if l2 < l1
         if l2 < l1:
             ltemp, ntemp = l2, n2
@@ -78,9 +78,6 @@ class crossSpectra():
         # computing the cross-spectrum
         _csp = afft1p.conjugate()*afft2p
         _csn = afft1n.conjugate()*afft2n
-
-        self.freq_p = freq_p
-        self.freq_n = freq_n
 
         return _csp, _csn
     # }}} get_raw_cs(self, plot=False):
