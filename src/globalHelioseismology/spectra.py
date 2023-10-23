@@ -8,6 +8,7 @@ import time
 import os
 
 from ..globalvars import dirConfig
+from .. import functions as FN
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
 package_dir = os.path.dirname(os.path.dirname(current_dir))
@@ -312,8 +313,6 @@ class crossSpectra():
             l2, n2 = l1, n1
             l1, n1 = ltemp, ntemp
 
-        seismo_home = "/scratch/seismogroup/samarth/home-sgk"
-        seismo_scratch = "/scratch/seismogroup/samarth/scratch-sgk"
         self.plot_data = plot_data
         self.plot_snr = plot_snr
 
@@ -322,14 +321,12 @@ class crossSpectra():
         self.n1, self.n2 = int(n1), int(n2)
         self.l1, self.l2 = int(l1), int(l2)
         self.t, self.dayavgnum = int(t), int(dayavgnum)
-        self.mode_data = np.loadtxt(f"{seismo_home}/globalHelioseismology/" +
-                                    f"mode-params/hmi.6328.36")
-        self.dirname = f"{seismo_scratch}/globalHelioseismology"
+        self.mode_data = np.loadtxt(f"{DIRS.mode_dir}/hmi.6328.36")
+        self.dirname = f"{DIRS.output_dir}"
         self.fname_suffix = f"{n1:02d}.{l1:03d}-{n2:02d}.{l2:03d}-{self.t:03d}"
 
         if plot_data:
-            if not os.path.isdir(f"{self.dirname}/plots/csplot_{self.n1:02d}"):
-                os.mkdir(f"{self.dirname}/plots/csplot_{self.n1:02d}")
+            FN.mkdirs(f"{self.dirname}/plots/csplot_{self.n1:02d}")
             fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(10, 10))
             self.fig = fig
             self.axs = axs.flatten()
@@ -443,8 +440,7 @@ class crossSpectra():
             self.axs[2].plot(self.freq_p[0], _bslp.imag, '--y')
             self.axs[3].plot(self.freq_n[0], _bsln.imag, '--y')
 
-        if not os.path.isdir(f"{self.dirname}/csdata_{self.n1:02d}"):
-            os.mkdir(f"{self.dirname}/csdata_{self.n1:02d}")
+        FN.mkdirs(f"{self.dirname}/csdata_{self.n1:02d}")
 
         self.save_data(f"{self.dirname}/csdata_{self.n1:02d}/" +
                        f"csp_data_{self.fname_suffix}.npy", csp_summ)

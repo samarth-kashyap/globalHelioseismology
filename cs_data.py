@@ -1,6 +1,6 @@
 # {{{ Library imports
 import argparse
-import globalHelioseismology as GH
+from src import globalHelioseismology as GH
 
 # {{{ ArgumentParser
 parser = argparse.ArgumentParser()
