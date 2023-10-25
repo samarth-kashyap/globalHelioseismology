@@ -7,8 +7,8 @@ import numpy as np
 import time
 import os
 
-from ..globalvars import dirConfig
-from .. import functions as FN
+from .globalvars import dirConfig
+from . import functions as FN
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
 package_dir = os.path.dirname(os.path.dirname(current_dir))

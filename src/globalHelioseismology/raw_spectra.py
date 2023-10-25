@@ -9,7 +9,7 @@ import os
 
 from .spectra import frequencyBins
 from .spectra import observedData
-from ..globalvars import dirConfig
+from .globalvars import dirConfig
 
 DIRS = dirConfig()
 

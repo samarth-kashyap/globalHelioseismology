@@ -24,7 +24,7 @@ from setuptools.command.test import test as TestCommand
 setup(
     name='globalHelioseismology',
     version='1.0.0',
-    packages=find_packages("."), # Finds every folder with __init__.py in it. (Hehe)
+    packages=find_packages("src"), # Finds every folder with __init__.py in it. (Hehe)
     install_requires=[
         "numpy", "scipy"
     ],
