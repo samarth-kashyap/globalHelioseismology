@@ -1,6 +1,6 @@
 # {{{ Library imports
 import argparse
-from src import globalHelioseismology as GH
+from src.globalHelioseismology import spectra as SP
 
 # {{{ ArgumentParser
 parser = argparse.ArgumentParser()
@@ -19,5 +19,5 @@ parser.add_argument("--plot",
 ARGS = parser.parse_args()
 # }}} parser
 
-cs = GH.spectra.crossSpectra(ARGS.n1, ARGS.l1, ARGS.n2, ARGS.l2, ARGS.t,
-                             plot_data=ARGS.plot, plot_snr=True)
+cs = SP.crossSpectra(ARGS.n1, ARGS.l1, ARGS.n2, ARGS.l2, ARGS.t,
+                     plot_data=ARGS.plot, plot_snr=True)
