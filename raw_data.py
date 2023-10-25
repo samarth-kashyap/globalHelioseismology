@@ -3,7 +3,7 @@ import os
 from tqdm import tqdm
 import numpy as np
 import argparse
-from src import globalHelioseismology as GH
+from src.globalHelioseismology import raw_spectra as RS
 
 # {{{ ArgumentParser
 parser = argparse.ArgumentParser()
@@ -29,7 +29,7 @@ daylist = np.arange(daynum_start, daynum_start+num_blocks*day_diff, day_diff)
 daylist = daylist.astype('int')
 
 for day in tqdm(daylist, desc='Raw spectra for HMI blocks'):
-    cs = GH.raw_spectra.crossSpectra(ARGS.n1, ARGS.l1, ARGS.n2, ARGS.l2, ARGS.t, daynum=day, instrument='HMI')
+    cs = RS.crossSpectra(ARGS.n1, ARGS.l1, ARGS.n2, ARGS.l2, ARGS.t, daynum=day, instrument='HMI')
     csp, csn = cs.get_raw_cs(daynum=day)
     store_dir = f"{cs.dirname}/{day:04d}"
     if not os.path.exists(store_dir): os.makedirs(store_dir)
